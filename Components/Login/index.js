@@ -1,6 +1,12 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 
+import {
+  loginUser,
+  registerUser,
+  checkForExpiredToken
+} from "../../store/actions/authActions";
+
 // NativeBase Components
 import {
   Text,
@@ -17,9 +23,28 @@ import {
 } from "native-base";
 
 class Login extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      username: "",
+      password: ""
+    };
+  }
   static navigationOptions = {
     title: "Login"
   };
+
+  login() {
+    this.props.login(this.state, this.props.navigation);
+  }
+
+  register() {
+    this.props.register(this.state, this.props.navigation);
+  }
+
+  componentDidMount() {
+    this.props.check(this.props.navigation);
+  }
   render() {
     return (
       <Content>
@@ -39,7 +64,11 @@ class Login extends Component {
                     marginBottom: 10
                   }}
                 >
-                  <Input autoCorrect={false} autoCapitalize="none" />
+                  <Input
+                    autoCorrect={false}
+                    autoCapitalize="none"
+                    onChangeText={value => this.setState({ username: value })}
+                  />
                 </Item>
                 <Body>
                   <Label style={{ color: "white" }}>Password</Label>
@@ -52,23 +81,16 @@ class Login extends Component {
                     autoCorrect={false}
                     secureTextEntry
                     autoCapitalize="none"
+                    onChangeText={value => this.setState({ password: value })}
                   />
                 </Item>
               </Form>
             </Body>
           </ListItem>
-          <Button
-            full
-            success
-            onPress={() => this.props.navigation.navigate("CoffeeList")}
-          >
+          <Button full success onPress={() => this.login()}>
             <Text>Login</Text>
           </Button>
-          <Button
-            full
-            warning
-            onPress={() => this.props.navigation.navigate("CoffeeList")}
-          >
+          <Button full warning onPress={() => this.register()}>
             <Text>Register</Text>
           </Button>
         </List>
@@ -80,4 +102,19 @@ class Login extends Component {
   }
 }
 
-export default Login;
+const mapStateToProps = state => ({
+  user: state.auth.user
+});
+
+const mapActionsToProps = dispatch => {
+  return {
+    login: (user, navigation) => dispatch(loginUser(user, navigation)),
+    register: (user, navigation) => dispatch(registerUser(user, navigation)),
+    check: navigation => dispatch(checkForExpiredToken(navigation))
+  };
+};
+
+export default connect(
+  mapStateToProps,
+  mapActionsToProps
+)(Login);

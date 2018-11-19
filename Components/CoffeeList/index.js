@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import { ImageBackground, View, TouchableOpacity } from "react-native";
 import { connect } from "react-redux";
 
+import { logoutUser } from "../../store/actions/authActions";
+
 // NativeBase Components
 import {
   List,
@@ -13,7 +15,10 @@ import {
   Text,
   Left,
   Content,
-  Icon
+  Icon,
+  Footer,
+  Container,
+  Body
 } from "native-base";
 
 // Style
@@ -97,19 +102,48 @@ class CoffeeList extends Component {
       ListItems = coffeeshops.map(shop => this.renderItem(shop));
     }
     return (
-      <Content>
-        <List>{ListItems}</List>
-      </Content>
+      <Container>
+        <Content>
+          <List>{ListItems}</List>
+        </Content>
+        <Footer>
+          <Button
+            success
+            onPress={
+              this.props.user
+                ? () => this.props.logout()
+                : () => this.props.navigation.navigate("Login")
+            }
+          >
+            <Icon
+              name={this.props.user ? "logout" : "login"}
+              type="MaterialCommunityIcons"
+            />
+          </Button>
+          {this.props.user ? (
+            <Text>{this.props.user.username.toUpperCase()}</Text>
+          ) : (
+            <Text>Login</Text>
+          )}
+        </Footer>
+      </Container>
     );
   }
 }
 
 const mapStateToProps = state => ({
   coffee: state.coffee,
-  quantity: quantityCounter(state.cart.list)
+  quantity: quantityCounter(state.cart.list),
+  user: state.auth.user
 });
+
+const mapActionsToProps = dispatch => {
+  return {
+    logout: () => dispatch(logoutUser())
+  };
+};
 
 export default connect(
   mapStateToProps,
-  {}
+  mapActionsToProps
 )(CoffeeList);
