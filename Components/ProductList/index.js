@@ -2,6 +2,12 @@ import React, { Component } from "react";
 import { ImageBackground, View, TouchableOpacity } from "react-native";
 import { connect } from "react-redux";
 import { getProducts, fetchProduct } from "../../store/actions/productActions";
+import {
+  loginUser,
+  registerUser,
+  checkForExpiredToken,
+  fetchProfile
+} from "../../store/actions/authActions";
 import { logoutUser } from "../../store/actions/authActions";
 
 // NativeBase Components
@@ -31,7 +37,18 @@ import { quantityCounter } from "../../utilities/quantityCounter";
 class ProductList extends Component {
   static navigationOptions = ({ navigation }) => ({
     title: "Product List",
-    headerLeft: <Text style={{ color: "white", fontSize: 15 }}>Zain</Text>,
+    headerLeft: (
+      <Button light transparent onPress={() => navigation.navigate("Profile")}>
+        <Text>
+          <Icon
+            type="Feather"
+            name="user"
+            // name="productping-cart"
+            style={{ color: "white", fontSize: 15 }}
+          />
+        </Text>
+      </Button>
+    ),
     headerRight: (
       <Button
         light
@@ -42,7 +59,7 @@ class ProductList extends Component {
           {navigation.getParam("quantity", 0)}{" "}
           <Icon
             type="Feather"
-            // name="productping-cart"
+            name="shopping-cart"
             style={{ color: "white", fontSize: 15 }}
           />
         </Text>
@@ -52,12 +69,25 @@ class ProductList extends Component {
 
   componenDidMount() {
     this.props.navigation.setParams({ quantity: this.props.quantity });
-    if (this.props.product.id) this.props.fetchProduct(product.id);
+    if (this.props.product.id) {
+      this.props.fetchProduct(product.id);
+    }
+
+    if (this.props.user) {
+      console.log("juiygftdrfygjhkj");
+      this.props.fetchProfile(this.props.user.user_id);
+    }
   }
 
   componentDidUpdate(prevProps) {
     if (prevProps.quantity != this.props.quantity) {
       this.props.navigation.setParams({ quantity: this.props.quantity });
+    }
+    console.log(this.props.user);
+    console.log(prevProps.user);
+    if (this.props.user !== prevProps.user) {
+      console.log("hello");
+      this.props.fetchProfile(this.props.user.user_id);
     }
   }
 
@@ -171,7 +201,8 @@ const mapActionsToProps = dispatch => {
   return {
     logout: () => dispatch(logoutUser()),
     getProducts: () => dispatch(getProducts()),
-    fetchProduct: itemID => dispatch(fetchProduct(itemID))
+    fetchProduct: itemID => dispatch(fetchProduct(itemID)),
+    fetchProfile: user => dispatch(fetchProfile(user))
   };
 };
 

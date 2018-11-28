@@ -7,9 +7,11 @@ import ProductDetail from "../ProductDetail";
 import ProductCart from "../ProductCart";
 import Login from "../Login";
 import HomePage from "../HomePage";
+import Profile from "../Profile";
 
 export default createStackNavigator(
   {
+    Profile: Profile,
     ProductList: ProductList,
     ProductDetail: ProductDetail,
     ProductCart: ProductCart,

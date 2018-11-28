@@ -3,8 +3,10 @@ import * as actionTypes from "../actions/types";
 const initialState = {
   // complete me
   user: null,
+  profile: null,
   error: null,
-  isAuthenticated: false
+  isAuthenticated: false,
+  loading: true
 };
 
 export default (state = initialState, action) => {
@@ -15,7 +17,13 @@ export default (state = initialState, action) => {
         user: action.payload,
         isAuthenticated: true
       };
-
+    case actionTypes.FETCH_PROFILE:
+      console.log(action.payload);
+      return {
+        ...state,
+        profile: action.payload,
+        isAuthenticated: true
+      };
     case actionTypes.SET_ERROR:
       return {
         ...state,
