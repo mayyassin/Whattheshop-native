@@ -9,15 +9,15 @@ import { Container } from "native-base";
 import styles from "./styles";
 
 // Actions
-import { getCoffeeShops } from "../../store/actions/coffeeActions";
+import { getProducts, fetchProduct } from "../../store/actions/productActions";
 
 // Navigation
 import Nav from "../Navigation";
 
 class HomePage extends Component {
   componentDidMount() {
-    const { coffeeshops } = this.props.coffee;
-    if (!coffeeshops) this.props.getCoffeeShops();
+    const { productLists } = this.props.product;
+    if (!productLists) this.props.getProducts();
   }
 
   render() {
@@ -29,11 +29,12 @@ class HomePage extends Component {
   }
 }
 const mapStateToProps = state => ({
-  coffee: state.coffee
+  product: state.product
 });
 
 const mapActionsToProps = dispatch => ({
-  getCoffeeShops: () => dispatch(getCoffeeShops())
+  getProducts: () => dispatch(getProducts()),
+  fetchProduct: () => dispatch(fetchProduct())
 });
 
 export default connect(

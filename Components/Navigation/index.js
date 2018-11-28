@@ -2,31 +2,32 @@ import React from "react";
 import { createStackNavigator } from "react-navigation";
 
 // Components
-import CoffeeList from "../CoffeeList";
-import CoffeeDetail from "../CoffeeDetail";
-import CoffeeCart from "../CoffeeCart";
+import ProductList from "../ProductList";
+import ProductDetail from "../ProductDetail";
+import ProductCart from "../ProductCart";
 import Login from "../Login";
+import HomePage from "../HomePage";
 
 export default createStackNavigator(
   {
-    CoffeeList: CoffeeList,
-    CoffeeDetail: CoffeeDetail,
-    CoffeeCart: CoffeeCart,
+    ProductList: ProductList,
+    ProductDetail: ProductDetail,
+    ProductCart: ProductCart,
     Login: Login
   },
   {
-    initialRouteName: "CoffeeList",
+    initialRouteName: "Login",
     navigationOptions: {
       headerTintColor: "white",
       headerStyle: {
-        backgroundColor: "transparent"
+        backgroundColor: "#5B2C6F"
       },
       headerTextStyle: {
         fontWeight: "bold"
       }
     },
     cardStyle: {
-      backgroundColor: "rgb(20,90,100)"
+      backgroundColor: "white"
     }
   }
 );

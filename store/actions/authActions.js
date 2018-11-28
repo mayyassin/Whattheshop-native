@@ -34,7 +34,7 @@ export const checkForExpiredToken = navigation => {
           setAuthToken(token);
           // Set user
           dispatch(setCurrentUser(user));
-          navigation.navigate("CoffeeList");
+          navigation.navigate("ProductList");
         } else {
           dispatch(logout());
         }
@@ -46,22 +46,22 @@ export const checkForExpiredToken = navigation => {
 export const loginUser = (userData, navigation) => {
   return dispatch => {
     axios
-      .post("http://coffee.q8fawazo.me/api/login/", userData)
+      .post("http://192.168.100.37/api/login/", userData)
       .then(res => res.data)
       .then(user => {
         const decodedUser = jwt_decode(user.token);
         setAuthToken(user.token);
         dispatch(setCurrentUser(decodedUser));
       })
-      .then(() => navigation.navigate("CoffeeList"))
-      .catch(err => console.error(err.response));
+      .then(() => navigation.navigate("ProductList"))
+      .catch(err => console.error(err));
   };
 };
 
 export const registerUser = (userData, navigation) => {
   return dispatch => {
     axios
-      .post("http://coffee.q8fawazo.me/api/register/", userData)
+      .post("http://192.168.100.37/api/register/", userData)
       .then(() => loginUser(userData, navigation))
       .catch(err => console.error(err.response));
   };

@@ -4,7 +4,7 @@ import * as actionTypes from "./types";
 // Add item to Cart
 export const addItemToCart = (item, cart) => dispatch => {
   const index = cart.findIndex(
-    cartItem => cartItem.drink == item.drink && cartItem.option == item.option
+    cartItem => cartItem.name == item.name && cartItem.option == item.option
   );
   if (index >= 0) {
     cart[index].quantity++;

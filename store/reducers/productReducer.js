@@ -1,25 +1,31 @@
 import * as actionTypes from "../actions/types";
 
 const initialState = {
-  coffeeshops: null,
-  coffeeshop: null,
+  productLists: null,
+  productList: null,
   loading: false
 };
 
 export default function(state = initialState, action) {
   switch (action.type) {
-    case actionTypes.GET_COFFEESHOPS:
+    case actionTypes.GET_PRODUCTS:
       return {
         ...state,
-        coffeeshops: action.payload,
+        productLists: action.payload,
         loading: false
       };
-    case actionTypes.GET_COFFEESHOP_BY_ID:
+    case actionTypes.GET_PRODUCT_BY_ID:
       return {
         ...state,
-        coffeeshop: action.payload
+        productList: action.payload
       };
-    case actionTypes.COFFEESHOPS_LOADING:
+    case actionTypes.FETCH_PRODUCT:
+      return {
+        ...state,
+        productList: action.payload,
+        loading: false
+      };
+    case actionTypes.PRODUCTS_LOADING:
       return {
         ...state,
         loading: true

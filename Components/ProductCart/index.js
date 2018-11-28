@@ -19,7 +19,7 @@ import {
   checkoutCart
 } from "../../store/actions/cartActions";
 
-class CoffeeCart extends Component {
+class ProductCart extends Component {
   handleCheckout() {
     this.props.checkoutCart();
   }
@@ -60,7 +60,13 @@ class CoffeeCart extends Component {
     return (
       <List>
         {list.map((item, index) => this.renderItem(item, index))}
-        <Button full danger onPress={() => this.handleCheckout()}>
+        <Button
+          full
+          style={{
+            backgroundColor: "#C34EBE"
+          }}
+          onPress={() => this.handleCheckout()}
+        >
           <Text>Checkout</Text>
         </Button>
       </List>
@@ -81,4 +87,4 @@ const mapActionsToProps = dispatch => ({
 export default connect(
   mapStateToProps,
   mapActionsToProps
-)(CoffeeCart);
+)(ProductCart);

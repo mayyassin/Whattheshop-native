@@ -19,7 +19,8 @@ import {
   Input,
   Item,
   Content,
-  Header
+  Header,
+  Container
 } from "native-base";
 
 class Login extends Component {
@@ -54,7 +55,9 @@ class Login extends Component {
             <Body>
               <Form>
                 <Body>
-                  <Label style={{ color: "white" }}>Username</Label>
+                  <Label style={{ fontWeight: "bold", color: "#6C3483" }}>
+                    Username
+                  </Label>
                 </Body>
                 <Item
                   rounded
@@ -71,7 +74,9 @@ class Login extends Component {
                   />
                 </Item>
                 <Body>
-                  <Label style={{ color: "white" }}>Password</Label>
+                  <Label style={{ fontWeight: "bold", color: "#6C3483" }}>
+                    Password
+                  </Label>
                 </Body>
                 <Item
                   rounded
@@ -87,10 +92,29 @@ class Login extends Component {
               </Form>
             </Body>
           </ListItem>
-          <Button full success onPress={() => this.login()}>
+          <Button
+            style={{
+              alignSelf: "center",
+              justifyContent: "center",
+              width: 120,
+              backgroundColor: "#C34EBE"
+            }}
+            success
+            onPress={() => this.login()}
+          >
             <Text>Login</Text>
           </Button>
-          <Button full warning onPress={() => this.register()}>
+          <Text> </Text>
+          <Button
+            style={{
+              alignSelf: "center",
+              justifyContent: "center",
+              width: 120,
+              backgroundColor: "#C34EBE"
+            }}
+            warning
+            onPress={() => this.register()}
+          >
             <Text>Register</Text>
           </Button>
         </List>
