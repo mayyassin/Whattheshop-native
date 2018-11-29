@@ -10,6 +10,8 @@ import {
 } from "../../store/actions/authActions";
 import { logoutUser } from "../../store/actions/authActions";
 
+import axios from "axios";
+
 // NativeBase Components
 import {
   List,
@@ -67,15 +69,16 @@ class ProductList extends Component {
     )
   });
 
-  componenDidMount() {
+  componentDidMount() {
+    if (this.props.user) {
+      console.log("juiygftdrfygjhkj");
+      console.log(axios.defaults.headers.common.Authorization);
+      this.props.fetchProfile();
+    }
+
     this.props.navigation.setParams({ quantity: this.props.quantity });
     if (this.props.product.id) {
       this.props.fetchProduct(product.id);
-    }
-
-    if (this.props.user) {
-      console.log("juiygftdrfygjhkj");
-      this.props.fetchProfile(this.props.user.user_id);
     }
   }
 
@@ -83,11 +86,10 @@ class ProductList extends Component {
     if (prevProps.quantity != this.props.quantity) {
       this.props.navigation.setParams({ quantity: this.props.quantity });
     }
-    console.log(this.props.user);
-    console.log(prevProps.user);
+
     if (this.props.user !== prevProps.user) {
       console.log("hello");
-      this.props.fetchProfile(this.props.user.user_id);
+      this.props.fetchProfile();
     }
   }
 

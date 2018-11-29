@@ -7,11 +7,11 @@ import * as actionTypes from "./types";
 
 const setAuthToken = token => {
   if (token) {
-    AsyncStorage.setItem("token", token).then(
+    return AsyncStorage.setItem("token", token).then(
       () => (axios.defaults.headers.common.Authorization = `jwt ${token}`)
     );
   } else {
-    AsyncStorage.removeItem("token").then(
+    return AsyncStorage.removeItem("token").then(
       () => delete axios.defaults.headers.common.Authorization
     );
   }
@@ -30,9 +30,7 @@ export const checkForExpiredToken = navigation => {
         // Check token expiration
         if (user.exp >= currentTime) {
           // Set auth token header
-          setAuthToken(token);
-          // Set user
-          dispatch(setCurrentUser(user));
+          setAuthToken(token).then(() => dispatch(setCurrentUser(user)));
           navigation.navigate("ProductList");
         } else {
           dispatch(logout());
@@ -49,8 +47,9 @@ export const loginUser = (userData, navigation) => {
       .then(res => res.data)
       .then(user => {
         const decodedUser = jwt_decode(user.token);
-        setAuthToken(user.token);
-        dispatch(setCurrentUser(decodedUser));
+        setAuthToken(user.token).then(() =>
+          dispatch(setCurrentUser(decodedUser))
+        );
       })
       .then(() => navigation.navigate("ProductList"))
       .catch(err => console.error(err));
@@ -66,12 +65,13 @@ export const registerUser = (userData, navigation) => {
   };
 };
 
-export const fetchProfile = userID => {
+export const fetchProfile = () => {
   return dispatch => {
     axios
-      .get(`http://192.168.100.37/api/profile/${userID}/`)
+      .get(`http://192.168.100.37/api/profile/`)
       .then(res => res.data)
       .then(user => {
+        console.log(user);
         dispatch({
           type: actionTypes.FETCH_PROFILE,
           payload: user
