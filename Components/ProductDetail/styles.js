@@ -14,8 +14,7 @@ const styles = StyleSheet.create({
     borderBottomWidth: 1
   },
   top: {
-    marginLeft: 0,
-    backgroundColor: "#ffffcc"
+    marginLeft: 0
   },
   middleText: {
     color: "white",
@@ -30,6 +29,13 @@ const styles = StyleSheet.create({
   },
   item: {
     color: "white"
+  },
+  background: {
+    flex: 1
+  },
+  container: {
+    flex: 1,
+    justifyContent: "flex-end"
   }
 });
 

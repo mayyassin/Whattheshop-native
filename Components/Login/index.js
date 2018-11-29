@@ -6,7 +6,9 @@ import {
   registerUser,
   checkForExpiredToken
 } from "../../store/actions/authActions";
-
+import bubbles from "../../assets/images/bubbles.png";
+import { ImageBackground, View, TouchableOpacity } from "react-native";
+import styles from "./styles";
 // NativeBase Components
 import {
   Text,
@@ -48,79 +50,84 @@ class Login extends Component {
   }
   render() {
     return (
-      <Content>
+      <Content style={{ backgroundColor: "rgba(0,0,0,0.05)" }}>
         <Header transparent />
-        <List>
-          <ListItem style={{ borderBottomWidth: 0 }}>
-            <Body>
-              <Form>
-                <Body>
-                  <Label style={{ fontWeight: "bold", color: "#6C3483" }}>
-                    Username
-                  </Label>
-                </Body>
-                <Item
-                  rounded
-                  style={{
-                    backgroundColor: "white",
-                    marginTop: 10,
-                    marginBottom: 10
-                  }}
-                >
-                  <Input
-                    autoCorrect={false}
-                    autoCapitalize="none"
-                    onChangeText={value => this.setState({ username: value })}
-                  />
-                </Item>
-                <Body>
-                  <Label style={{ fontWeight: "bold", color: "#6C3483" }}>
-                    Password
-                  </Label>
-                </Body>
-                <Item
-                  rounded
-                  style={{ backgroundColor: "white", marginTop: 10 }}
-                >
-                  <Input
-                    autoCorrect={false}
-                    secureTextEntry
-                    autoCapitalize="none"
-                    onChangeText={value => this.setState({ password: value })}
-                  />
-                </Item>
-              </Form>
-            </Body>
-          </ListItem>
-          <Button
-            style={{
-              alignSelf: "center",
-              justifyContent: "center",
-              width: 120,
-              backgroundColor: "#C34EBE"
-            }}
-            success
-            onPress={() => this.login()}
-          >
-            <Text>Login</Text>
-          </Button>
-          <Text> </Text>
-          <Button
-            style={{
-              alignSelf: "center",
-              justifyContent: "center",
-              width: 120,
-              backgroundColor: "#C34EBE"
-            }}
-            warning
-            onPress={() => this.register()}
-          >
-            <Text>Register</Text>
-          </Button>
-        </List>
-        <Body>
-          <Label style={{ color: "red", opacity: 0.6 }} />
-        </Body>
+        <ImageBackground source={bubbles} style={styles.background}>
+          <List>
+            <ListItem style={{ borderBottomWidth: 0 }}>
+              <Body>
+                <Form>
+                  <Body>
+                    <Text> </Text>
+                    <Text> </Text>
+                    <Label style={{ fontWeight: "bold", color: "#F32BBD" }}>
+                      Username
+                    </Label>
+                  </Body>
+                  <Item
+                    rounded
+                    style={{
+                      backgroundColor: "white",
+                      marginTop: 10,
+                      marginBottom: 10
+                    }}
+                  >
+                    <Input
+                      autoCorrect={false}
+                      autoCapitalize="none"
+                      onChangeText={value => this.setState({ username: value })}
+                    />
+                  </Item>
+
+                  <Body>
+                    <Label style={{ fontWeight: "bold", color: "#F32BBD" }}>
+                      Password
+                    </Label>
+                  </Body>
+                  <Item
+                    rounded
+                    style={{ backgroundColor: "white", marginTop: 10 }}
+                  >
+                    <Input
+                      autoCorrect={false}
+                      secureTextEntry
+                      autoCapitalize="none"
+                      onChangeText={value => this.setState({ password: value })}
+                    />
+                  </Item>
+                </Form>
+              </Body>
+            </ListItem>
+            <Button
+              style={{
+                alignSelf: "center",
+                justifyContent: "center",
+                width: 120,
+                backgroundColor: "#79E5BE"
+              }}
+              success
+              onPress={() => this.login()}
+            >
+              <Text style={{ fontWeight: "bold" }}>Login</Text>
+            </Button>
+            <Text> </Text>
+            <Button
+              style={{
+                alignSelf: "center",
+                justifyContent: "center",
+                width: 120,
+                backgroundColor: "#79E5BE"
+              }}
+              warning
+              onPress={() => this.register()}
+            >
+              <Text style={{ fontWeight: "bold" }}>Register</Text>
+            </Button>
+          </List>
+          <Body>
+            <Label style={{ color: "red", opacity: 0.6 }} />
+          </Body>
+        </ImageBackground>
       </Content>
     );
   }

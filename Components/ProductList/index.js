@@ -156,7 +156,7 @@ class ProductList extends Component {
           >
             <Button
               style={{
-                backgroundColor: "#C34EBE"
+                backgroundColor: "#79E5BE"
               }}
               onPress={
                 this.props.user

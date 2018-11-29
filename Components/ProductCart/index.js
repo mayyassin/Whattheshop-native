@@ -12,7 +12,8 @@ import {
   ListItem,
   Icon
 } from "native-base";
-
+import bubbles from "../../assets/images/bubbles.png";
+import { ImageBackground, View, TouchableOpacity } from "react-native";
 // Actions
 import {
   removeItemFromCart,

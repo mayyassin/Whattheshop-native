@@ -3,17 +3,17 @@ import bubbles from "../../assets/images/bubbles.png";
 
 const styles = StyleSheet.create({
   text: {
-    color: "#5B2C6F",
-    fontSize: 15,
     fontWeight: "bold",
+    color: "black",
+    fontSize: 15,
     marginLeft: 16,
 
     justifyContent: "center",
     alignItems: "center"
   },
   divider: {
-    borderBottomColor: "transparent",
-    borderBottomWidth: 0
+    borderBottomColor: "black",
+    borderBottomWidth: 1
   },
   top: {
     marginLeft: 0

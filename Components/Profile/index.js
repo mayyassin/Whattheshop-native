@@ -7,7 +7,7 @@ import {
   checkForExpiredToken,
   fetchProfile
 } from "../../store/actions/authActions";
-
+import bubbles from "../../assets/images/bubbles.png";
 // NativeBase Components
 import {
   Thumbnail,
@@ -23,11 +23,14 @@ import {
   Item,
   Content,
   Header,
+  Footer,
   Container,
   Icon,
   Left,
   Right
 } from "native-base";
+
+import { ImageBackground, View, TouchableOpacity } from "react-native";
 
 import styles from "./styles";
 
@@ -60,7 +63,7 @@ class Profile extends Component {
           {navigation.getParam("quantity", 0)}{" "}
           <Icon
             type="Feather"
-            // name="productping-cart"
+            name="shopping-cart"
             style={{ color: "white", fontSize: 15 }}
           />
         </Text>
@@ -74,33 +77,49 @@ class Profile extends Component {
   render() {
     const profile = this.props.profile;
     return (
-      <Content>
-        <List>
-          <ListItem style={styles.top}>
-            <Left>
-              <Text style={styles.text}>{profile.firstname + "\n"}</Text>
-            </Left>
+      <ImageBackground source={bubbles} style={styles.background}>
+        <Content>
+          <List>
+            <ListItem style={styles.top}>
+              <Left>
+                <Text style={styles.text}>
+                  Name: {profile.firstname + " " + profile.lastname + "\n"}
+                  Date of birth: {profile.dob + "\n"}
+                  Email: {profile.email + "\n"}
+                  Phone number: {profile.number + "\n"}
+                </Text>
+              </Left>
 
-            <Body />
-            <Right>
-              <Thumbnail bordered source={{ uri: profile.img }} />
-            </Right>
-          </ListItem>
-          <ListItem style={{ borderBottomWidth: 0 }}>
-            <Left />
-            <Body />
-          </ListItem>
+              <Body />
+              <Right>
+                <Thumbnail bordered source={{ uri: profile.profile_pic }} />
+              </Right>
+            </ListItem>
+            <ListItem style={{ borderBottomWidth: 0 }}>
+              <Left />
+              <Body />
+            </ListItem>
+          </List>
+        </Content>
+        <Footer
+          style={{
+            width: "100%",
+            alignSelf: "center",
+            justifyContent: "center",
+            backgroundColor: "transparent"
+          }}
+        >
           <Button
             full
             style={{
-              backgroundColor: "#C34EBE"
+              backgroundColor: "#79E5BE"
             }}
             onPress={() => this.handleAdd()}
           >
-            <Text>Add</Text>
+            <Text style={{ fontWeight: "bold" }}>Update</Text>
           </Button>
-        </List>
-      </Content>
+        </Footer>
+      </ImageBackground>
     );
   }
 }
