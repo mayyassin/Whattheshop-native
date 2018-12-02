@@ -71,8 +71,6 @@ class ProductList extends Component {
 
   componentDidMount() {
     if (this.props.user) {
-      console.log("juiygftdrfygjhkj");
-      console.log(axios.defaults.headers.common.Authorization);
       this.props.fetchProfile();
     }
 
@@ -88,7 +86,6 @@ class ProductList extends Component {
     }
 
     if (this.props.user !== prevProps.user) {
-      console.log("hello");
       this.props.fetchProfile();
     }
   }
