@@ -1,4 +1,5 @@
 import { StyleSheet } from "react-native";
+import bubbles from "../../assets/images/bubbles.png";
 
 const styles = StyleSheet.create({
   text: {
@@ -11,11 +12,12 @@ const styles = StyleSheet.create({
     alignItems: "center"
   },
   divider: {
-    borderBottomColor: "black",
-    borderBottomWidth: 1
+    borderBottomColor: "transparent",
+    borderBottomWidth: 0
   },
   top: {
     marginLeft: 0
+    // backgroundImage: bubbles,
   },
   middleText: {
     color: "white",
@@ -33,10 +35,6 @@ const styles = StyleSheet.create({
   },
   background: {
     flex: 1
-  },
-  container: {
-    flex: 1,
-    justifyContent: "flex-end"
   }
 });
 

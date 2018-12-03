@@ -37,9 +37,9 @@ import { ImageBackground, View, TouchableOpacity } from "react-native";
 
 import styles from "./styles";
 
-class Profile extends Component {
+class UpdateProfile extends Component {
   static navigationOptions = ({ navigation }) => ({
-    title: "Profile",
+    title: "UpdateProfile",
     headerLeft: (
       <Button
         light
@@ -74,12 +74,6 @@ class Profile extends Component {
     )
   });
 
-  handlePress(product) {
-    this.props.navigation.navigate("UpdateProfile", {
-      user: user
-    });
-  }
-
   render() {
     const profile = this.props.profile;
     return (
@@ -106,15 +100,6 @@ class Profile extends Component {
               <Body />
             </ListItem>
           </List>
-          <Button
-            full
-            style={{
-              backgroundColor: "#79E5BE"
-            }}
-            onPress={() => this.props.navigation.navigate("AddressForm")}
-          >
-            <Text style={{ fontWeight: "bold" }}>Add Address</Text>
-          </Button>
         </Content>
         <Footer
           style={{
@@ -129,7 +114,7 @@ class Profile extends Component {
             style={{
               backgroundColor: "#79E5BE"
             }}
-            onPress={() => this.handlePress(user)}
+            onPress={() => this.handleAdd(updateProfile(this.props.user))}
           >
             <Text style={{ fontWeight: "bold" }}>Update</Text>
           </Button>
@@ -147,11 +132,11 @@ const mapStateToProps = state => ({
 
 const mapActionsToProps = dispatch => {
   return {
-    updateProfile: profile => dispatch(updateProfile(user))
+    updateProfile: user => dispatch(updateProfile(user))
   };
 };
 
 export default connect(
   mapStateToProps,
   mapActionsToProps
-)(Profile);
+)(UpdateProfile);

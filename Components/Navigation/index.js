@@ -8,11 +8,15 @@ import ProductCart from "../ProductCart";
 import Login from "../Login";
 import HomePage from "../HomePage";
 import Profile from "../Profile";
+import UpdateProfile from "../UpdateProfile";
+ 
 import AddressForm from "../Addresses";
+
 
 export default createStackNavigator(
   {
     Profile: Profile,
+    UpdateProfile: UpdateProfile,
     ProductList: ProductList,
     ProductDetail: ProductDetail,
     ProductCart: ProductCart,
@@ -20,7 +24,7 @@ export default createStackNavigator(
     AddressForm: AddressForm
   },
   {
-    initialRouteName: "Login",
+    initialRouteName: "ProductList",
     navigationOptions: {
       headerTintColor: "white",
       headerStyle: {

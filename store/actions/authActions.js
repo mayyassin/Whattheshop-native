@@ -65,6 +65,7 @@ export const registerUser = (userData, navigation) => {
   };
 };
 
+
 export const fetchProfile = () => {
   return dispatch => {
     axios
