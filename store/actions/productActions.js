@@ -7,7 +7,7 @@ import * as actionTypes from "./types";
 export const getProducts = () => dispatch => {
   dispatch(setProductsLoading());
   axios
-    .get("http://192.168.1.13:8000/api/product/list/")
+    .get("http://192.168.100.37/api/product/list/")
     .then(res => res.data)
     .then(products => {
       dispatch({
@@ -22,7 +22,7 @@ export const fetchProduct = itemID => {
   return dispatch => {
     dispatch(setProductsLoading());
     axios
-      .get(`http://192.168.1.13:8000/api/product/${itemID}/detail/`)
+      .get(`http://192.168.100.37/api/product/${itemID}/detail/`)
       .then(res => res.data)
       .then(item => {
         dispatch({

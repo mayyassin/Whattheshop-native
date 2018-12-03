@@ -74,12 +74,6 @@ class Profile extends Component {
     )
   });
 
-  handlePress(product) {
-    this.props.navigation.navigate("UpdateProfile", {
-      user: user
-    });
-  }
-
   render() {
     const profile = this.props.profile;
     return (
@@ -129,7 +123,7 @@ class Profile extends Component {
             style={{
               backgroundColor: "#79E5BE"
             }}
-            onPress={() => this.handlePress(user)}
+            onPress={() => this.props.navigation.navigate("UpdateProfile")}
           >
             <Text style={{ fontWeight: "bold" }}>Update</Text>
           </Button>
