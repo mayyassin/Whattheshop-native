@@ -3,7 +3,7 @@ import * as actionTypes from "./types";
 import axios from "axios";
 
 const instance = axios.create({
-  baseURL: "http://192.168.1.13:8000"
+  baseURL: "http://192.168.100.32:8000/"
 });
 
 export const setLoading = () => ({
@@ -30,7 +30,7 @@ export const fetchAddresses = () => {
   return dispatch => {
     dispatch(setLoading());
     instance
-      .get("/api/address/list/")
+      .get("api/address/list/")
       .then(res => res.data)
       .then(addresses => {
         return dispatch({

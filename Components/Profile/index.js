@@ -1,12 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 
-import {
-  loginUser,
-  registerUser,
-  checkForExpiredToken,
-  fetchProfile
-} from "../../store/actions/authActions";
+import * as actionTypes from "../../store/actions/";
 import bubbles from "../../assets/images/bubbles.png";
 // NativeBase Components
 import {
@@ -138,7 +133,8 @@ const mapStateToProps = state => ({
 
 const mapActionsToProps = dispatch => {
   return {
-    fetchProfile: user => dispatch(fetchProfile(user))
+    fetchProfile: user => dispatch(actionTypes.fetchProfile(user)),
+    fetchAddresses: user => dispatch(actionTypes.fetchAddresses())
   };
 };
 

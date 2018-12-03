@@ -5,6 +5,10 @@ import { AsyncStorage } from "react-native";
 
 import * as actionTypes from "./types";
 
+const instance = axios.create({
+  baseURL: "http://192.168.100.32:8000/"
+});
+
 const setAuthToken = token => {
   if (token) {
     return AsyncStorage.setItem("token", token).then(
@@ -33,7 +37,7 @@ export const checkForExpiredToken = navigation => {
           setAuthToken(token).then(() => dispatch(setCurrentUser(user)));
           navigation.navigate("ProductList");
         } else {
-          dispatch(logout());
+          dispatch(logoutUser());
         }
       }
     });
@@ -42,8 +46,8 @@ export const checkForExpiredToken = navigation => {
 
 export const loginUser = (userData, navigation) => {
   return dispatch => {
-    axios
-      .post("http://192.168.1.13:8000/api/login/", userData)
+    instance
+      .post("api/login/", userData)
       .then(res => res.data)
       .then(user => {
         const decodedUser = jwt_decode(user.token);
@@ -58,8 +62,8 @@ export const loginUser = (userData, navigation) => {
 
 export const registerUser = (userData, navigation) => {
   return dispatch => {
-    axios
-      .post("http://192.168.1.13:8000/api/register/", userData)
+    instance
+      .post("api/register/", userData)
       .then(() => loginUser(userData, navigation))
       .catch(err => console.error(err.response));
   };
@@ -67,8 +71,8 @@ export const registerUser = (userData, navigation) => {
 
 export const fetchProfile = () => {
   return dispatch => {
-    axios
-      .get(`http://192.168.1.13:8000/api/profile/`)
+    instance
+      .get(`api/profile/`)
       .then(res => res.data)
       .then(user => {
         dispatch({
