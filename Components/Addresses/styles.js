@@ -6,8 +6,8 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     color: "black",
     fontSize: 15,
-    marginLeft: 16,
-
+    flex: 5,
+    flexWrap: "wrap",
     justifyContent: "center",
     alignItems: "center"
   },
@@ -35,6 +35,9 @@ const styles = StyleSheet.create({
   },
   background: {
     flex: 1
+  },
+  transparent: {
+    flexDirection: "row"
   }
 });
 

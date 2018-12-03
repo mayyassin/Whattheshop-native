@@ -67,6 +67,17 @@ class Profile extends Component {
     )
   });
 
+
+  componentDidMount() {
+    this.props.fetchAddresses();
+  }
+
+  handlePress(product) {
+    this.props.navigation.navigate("UpdateProfile", {
+      user: user
+    });
+  }
+
   render() {
     const profile = this.props.profile;
     return (
@@ -102,6 +113,24 @@ class Profile extends Component {
           >
             <Text style={{ fontWeight: "bold" }}>Add Address</Text>
           </Button>
+          <Button
+            full
+            style={{
+              backgroundColor: "#79E5BE"
+            }}
+            onPress={() => this.props.navigation.navigate("AddressList")}
+          >
+            <Text style={{ fontWeight: "bold" }}>Check Addresses</Text>
+          </Button>
+          <Button
+            full
+            style={{
+              backgroundColor: "#79E5BE"
+            }}
+            onPress={() => this.props.navigation.navigate("OrdersList")}
+          >
+            <Text style={{ fontWeight: "bold" }}>Check Order History</Text>
+          </Button>
         </Content>
         <Footer
           style={{
@@ -134,8 +163,10 @@ const mapStateToProps = state => ({
 
 const mapActionsToProps = dispatch => {
   return {
+
+
     fetchProfile: user => dispatch(actionTypes.fetchProfile(user)),
-    fetchAddresses: user => dispatch(actionTypes.fetchAddresses()),
+     fetchAddresses: () => dispatch(actionTypes.fetchAddresses()),
     updateProfile: profile => dispatch(actionTypes.updateProfile(user))
   };
 };

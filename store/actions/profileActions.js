@@ -8,7 +8,7 @@ import * as actionTypes from "./types";
 export const fetchProfile = () => {
   return dispatch => {
     axios
-      .get(`http://192.168.100.37/api/profile/`)
+      .get(`http://192.168.100.32:8000/api/profile/`)
       .then(res => res.data)
       .then(user => {
         console.log(user);
