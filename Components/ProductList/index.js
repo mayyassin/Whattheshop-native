@@ -5,10 +5,10 @@ import { getProducts, fetchProduct } from "../../store/actions/productActions";
 import {
   loginUser,
   registerUser,
-  checkForExpiredToken,
-  fetchProfile
+  checkForExpiredToken
 } from "../../store/actions/authActions";
 import { logoutUser } from "../../store/actions/authActions";
+import { fetchProfile } from "../../store/actions/profileActions";
 
 import axios from "axios";
 

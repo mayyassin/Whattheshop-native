@@ -10,7 +10,8 @@ import {
   List,
   Button,
   ListItem,
-  Icon
+  Icon,
+  Footer
 } from "native-base";
 import bubbles from "../../assets/images/bubbles.png";
 import { ImageBackground, View, TouchableOpacity } from "react-native";
@@ -19,6 +20,7 @@ import {
   removeItemFromCart,
   checkoutCart
 } from "../../store/actions/cartActions";
+import styles from "./styles";
 
 class ProductCart extends Component {
   handleCheckout() {
@@ -39,7 +41,7 @@ class ProductCart extends Component {
     return (
       <ListItem key={index}>
         <Left>
-          <Text style={{ color: "white", marginLeft: 16 }}> {item.drink} </Text>
+          <Text style={{ color: "white", marginLeft: 16 }}> {item.name} </Text>
           <Text note style={{ marginLeft: 16 }}>
             {item.option}
           </Text>
@@ -59,18 +61,27 @@ class ProductCart extends Component {
   render() {
     const { list } = this.props.cart;
     return (
-      <List>
-        {list.map((item, index) => this.renderItem(item, index))}
-        <Button
-          full
+      <ImageBackground source={bubbles} style={styles.background}>
+        <List>{list.map((item, index) => this.renderItem(item, index))}</List>
+        <Footer
           style={{
-            backgroundColor: "#C34EBE"
+            width: "100%",
+            alignSelf: "center",
+            justifyContent: "center",
+            backgroundColor: "transparent"
           }}
-          onPress={() => this.handleCheckout()}
         >
-          <Text>Checkout</Text>
-        </Button>
-      </List>
+          <Button
+            full
+            style={{
+              backgroundColor: "#79E5BE"
+            }}
+            onPress={() => this.handleCheckout()}
+          >
+            <Text style={{ fontWeight: "bold" }}>Checkout</Text>
+          </Button>
+        </Footer>
+      </ImageBackground>
     );
   }
 }

@@ -65,22 +65,6 @@ export const registerUser = (userData, navigation) => {
   };
 };
 
-export const fetchProfile = () => {
-  return dispatch => {
-    axios
-      .get(`http://192.168.100.37/api/profile/`)
-      .then(res => res.data)
-      .then(user => {
-        console.log(user);
-        dispatch({
-          type: actionTypes.FETCH_PROFILE,
-          payload: user
-        });
-      })
-      .catch(err => console.error(err));
-  };
-};
-
 export const logoutUser = () => {
   setAuthToken();
   return { type: actionTypes.LOGOUT_USER };
