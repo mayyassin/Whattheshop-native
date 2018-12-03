@@ -15,14 +15,21 @@ import {
 import bubbles from "../../assets/images/bubbles.png";
 import { ImageBackground, View, TouchableOpacity } from "react-native";
 // Actions
-import {
-  removeItemFromCart,
-  checkoutCart
-} from "../../store/actions/cartActions";
+import { removeItemFromCart, checkout } from "../../store/actions/cartActions";
 
 class ProductCart extends Component {
   handleCheckout() {
-    this.props.checkoutCart();
+    if (this.props.user) {
+      const cart = {
+        cart: this.props.cart.cart,
+        address: this.props.cart.address
+      };
+      this.props.checkout(cart);
+      alert("You have successfully checked out");
+    } else {
+      alert("You have to login first to checkout");
+      this.props.navigation.navigate("Login");
+    }
   }
 
   handleRemove(item) {
@@ -30,22 +37,24 @@ class ProductCart extends Component {
   }
 
   componentDidMount() {
-    if (!this.props.user) {
-      this.props.navigation.replace("Login");
-    }
+    // if (!this.props.user) {
+    //   this.props.navigation.replace("Login");
+    // }
   }
 
-  renderItem(item, index) {
+  renderItem(oneProduct) {
     return (
-      <ListItem key={index}>
+      <ListItem key={oneProduct.item.id}>
         <Left>
-          <Text style={{ color: "white", marginLeft: 16 }}> {item.drink} </Text>
+          <Text style={{ color: "black", marginLeft: 16 }}>
+            {oneProduct.item.name}
+          </Text>
           <Text note style={{ marginLeft: 16 }}>
-            {item.option}
+            {oneProduct.item.price + " KD"}
           </Text>
         </Left>
         <Body>
-          <Text style={{ color: "white" }}>{item.quantity}</Text>
+          <Text>{oneProduct.quantity}</Text>
         </Body>
         <Right>
           <Button transparent onPress={() => this.handleRemove(item)}>
@@ -57,19 +66,23 @@ class ProductCart extends Component {
   }
 
   render() {
-    const { list } = this.props.cart;
+    const list = this.props.cart.cart;
     return (
       <List>
-        {list.map((item, index) => this.renderItem(item, index))}
-        <Button
-          full
-          style={{
-            backgroundColor: "#C34EBE"
-          }}
-          onPress={() => this.handleCheckout()}
-        >
-          <Text>Checkout</Text>
-        </Button>
+        {list.map(product => this.renderItem(product))}
+        {this.props.cart.cart.length !== 0 ? (
+          <Button
+            full
+            style={{
+              backgroundColor: "#C34EBE"
+            }}
+            onPress={() => this.handleCheckout()}
+          >
+            <Text>Checkout</Text>
+          </Button>
+        ) : (
+          <Text>No Items in your cart</Text>
+        )}
       </List>
     );
   }
@@ -82,7 +95,7 @@ const mapStateToProps = state => ({
 
 const mapActionsToProps = dispatch => ({
   removeItemFromCart: item => dispatch(removeItemFromCart(item)),
-  checkoutCart: () => dispatch(checkoutCart())
+  checkout: cart => dispatch(checkout(cart))
 });
 
 export default connect(

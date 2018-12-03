@@ -3,7 +3,8 @@ import * as actionTypes from "../actions/types";
 const initialState = {
   productLists: null,
   productList: null,
-  loading: false
+  loadingA: true,
+  loadingB: true
 };
 
 export default function(state = initialState, action) {
@@ -12,23 +13,28 @@ export default function(state = initialState, action) {
       return {
         ...state,
         productLists: action.payload,
-        loading: false
+        loadingA: false
       };
-    case actionTypes.GET_PRODUCT_BY_ID:
-      return {
-        ...state,
-        productList: action.payload
-      };
+    // case actionTypes.GET_PRODUCT_BY_ID:
+    //   return {
+    //     ...state,
+    //     productList: action.payload
+    //   };
     case actionTypes.FETCH_PRODUCT:
       return {
         ...state,
         productList: action.payload,
-        loading: false
+        loadingB: false
       };
     case actionTypes.PRODUCTS_LOADING:
       return {
         ...state,
-        loading: true
+        loadingA: true
+      };
+    case actionTypes.PRODUCT_LOADING:
+      return {
+        ...state,
+        loadingB: true
       };
     default:
       return state;

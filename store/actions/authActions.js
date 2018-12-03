@@ -17,7 +17,30 @@ const setAuthToken = token => {
   }
 };
 
-export const checkForExpiredToken = navigation => {
+// export const checkForExpiredToken = navigation => {
+//   return dispatch => {
+//     // Get token
+//     AsyncStorage.getItem("token").then(token => {
+//       if (token) {
+//         const currentTime = Date.now() / 1000;
+
+//         // Decode token and get user info
+//         const user = jwt_decode(token);
+
+//         // Check token expiration
+//         if (user.exp >= currentTime) {
+//           // Set auth token header
+//           setAuthToken(token).then(() => dispatch(setCurrentUser(user)));
+//           navigation.navigate("ProductList");
+//         } else {
+//           dispatch(logout());
+//         }
+//       }
+//     });
+//   };
+// };
+
+export const checkForExpiredToken = () => {
   return dispatch => {
     // Get token
     AsyncStorage.getItem("token").then(token => {
@@ -31,7 +54,6 @@ export const checkForExpiredToken = navigation => {
         if (user.exp >= currentTime) {
           // Set auth token header
           setAuthToken(token).then(() => dispatch(setCurrentUser(user)));
-          navigation.navigate("ProductList");
         } else {
           dispatch(logout());
         }
@@ -43,7 +65,7 @@ export const checkForExpiredToken = navigation => {
 export const loginUser = (userData, navigation) => {
   return dispatch => {
     axios
-      .post("http://192.168.100.37/api/login/", userData)
+      .post("http://192.168.100.35:8000/api/login/", userData)
       .then(res => res.data)
       .then(user => {
         const decodedUser = jwt_decode(user.token);
@@ -59,7 +81,7 @@ export const loginUser = (userData, navigation) => {
 export const registerUser = (userData, navigation) => {
   return dispatch => {
     axios
-      .post("http://192.168.100.37/api/register/", userData)
+      .post("http://192.168.100.35:8000/api/register/", userData)
       .then(() => loginUser(userData, navigation))
       .catch(err => console.error(err.response));
   };
@@ -68,10 +90,9 @@ export const registerUser = (userData, navigation) => {
 export const fetchProfile = () => {
   return dispatch => {
     axios
-      .get(`http://192.168.100.37/api/profile/`)
+      .get(`http://192.168.100.35:8000/api/profile/`)
       .then(res => res.data)
       .then(user => {
-        console.log(user);
         dispatch({
           type: actionTypes.FETCH_PROFILE,
           payload: user

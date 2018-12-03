@@ -58,7 +58,7 @@ class ProductList extends Component {
         onPress={() => navigation.navigate("ProductCart")}
       >
         <Text>
-          {navigation.getParam("quantity", 0)}{" "}
+          {/* {navigation.getParam("quantity", 0)}{" "} */}
           <Icon
             type="Feather"
             name="shopping-cart"
@@ -71,8 +71,6 @@ class ProductList extends Component {
 
   componentDidMount() {
     if (this.props.user) {
-      console.log("juiygftdrfygjhkj");
-      console.log(axios.defaults.headers.common.Authorization);
       this.props.fetchProfile();
     }
 
@@ -88,7 +86,6 @@ class ProductList extends Component {
     }
 
     if (this.props.user !== prevProps.user) {
-      console.log("hello");
       this.props.fetchProfile();
     }
   }
@@ -194,9 +191,9 @@ class ProductList extends Component {
 
 const mapStateToProps = state => ({
   product: state.product,
-  quantity: quantityCounter(state.cart.list),
+  // quantity: quantityCounter(state.cart.list),
   user: state.auth.user,
-  loading: state.product.loading
+  loading: state.product.loadingA
 });
 
 const mapActionsToProps = dispatch => {
