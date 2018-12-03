@@ -9,6 +9,9 @@ import Login from "../Login";
 import HomePage from "../HomePage";
 import Profile from "../Profile";
 import UpdateProfile from "../UpdateProfile";
+ 
+import AddressForm from "../Addresses";
+
 
 export default createStackNavigator(
   {
@@ -17,7 +20,8 @@ export default createStackNavigator(
     ProductList: ProductList,
     ProductDetail: ProductDetail,
     ProductCart: ProductCart,
-    Login: Login
+    Login: Login,
+    AddressForm: AddressForm
   },
   {
     initialRouteName: "ProductList",

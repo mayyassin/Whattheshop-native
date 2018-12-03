@@ -18,7 +18,6 @@ export default (state = initialState, action) => {
         isAuthenticated: true
       };
     case actionTypes.FETCH_PROFILE:
-      console.log(action.payload);
       return {
         ...state,
         profile: action.payload,

@@ -43,7 +43,7 @@ export const checkForExpiredToken = navigation => {
 export const loginUser = (userData, navigation) => {
   return dispatch => {
     axios
-      .post("http://192.168.100.37/api/login/", userData)
+      .post("http://192.168.1.13:8000/api/login/", userData)
       .then(res => res.data)
       .then(user => {
         const decodedUser = jwt_decode(user.token);
@@ -59,9 +59,25 @@ export const loginUser = (userData, navigation) => {
 export const registerUser = (userData, navigation) => {
   return dispatch => {
     axios
-      .post("http://192.168.100.37/api/register/", userData)
+      .post("http://192.168.1.13:8000/api/register/", userData)
       .then(() => loginUser(userData, navigation))
       .catch(err => console.error(err.response));
+  };
+};
+
+
+export const fetchProfile = () => {
+  return dispatch => {
+    axios
+      .get(`http://192.168.1.13:8000/api/profile/`)
+      .then(res => res.data)
+      .then(user => {
+        dispatch({
+          type: actionTypes.FETCH_PROFILE,
+          payload: user
+        });
+      })
+      .catch(err => console.error(err));
   };
 };
 

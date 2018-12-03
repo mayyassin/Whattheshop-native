@@ -79,6 +79,7 @@ class Profile extends Component {
       user: user
     });
   }
+
   render() {
     const profile = this.props.profile;
     return (
@@ -105,6 +106,15 @@ class Profile extends Component {
               <Body />
             </ListItem>
           </List>
+          <Button
+            full
+            style={{
+              backgroundColor: "#79E5BE"
+            }}
+            onPress={() => this.props.navigation.navigate("AddressForm")}
+          >
+            <Text style={{ fontWeight: "bold" }}>Add Address</Text>
+          </Button>
         </Content>
         <Footer
           style={{
