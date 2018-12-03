@@ -28,7 +28,7 @@ export const createAddress = (addressDetail, navigate) => {
 
 export const fetchAddresses = () => {
   return dispatch => {
-    dispatch(setLoading());
+    // dispatch(setLoading());
     instance
       .get("api/address/list/")
       .then(res => res.data)
