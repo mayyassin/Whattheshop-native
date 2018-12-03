@@ -3,6 +3,7 @@ import * as actionTypes from "../actions/types";
 const initialState = {
   productLists: null,
   productList: null,
+  filteredProducts: [],
   loading: false
 };
 
@@ -12,6 +13,7 @@ export default function(state = initialState, action) {
       return {
         ...state,
         productLists: action.payload,
+        filteredProducts: action.payload,
         loading: false
       };
     case actionTypes.GET_PRODUCT_BY_ID:
@@ -29,6 +31,14 @@ export default function(state = initialState, action) {
       return {
         ...state,
         loading: true
+      };
+    case actionTypes.FILTER_PRODUCTS:
+      return {
+        ...state,
+        filteredProducts: state.productLists.filter(product => {
+          return `${product.name}`.toLowerCase().includes(action.payload);
+        }),
+        loading: false
       };
     default:
       return state;

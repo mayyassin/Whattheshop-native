@@ -6,7 +6,7 @@ import { AsyncStorage } from "react-native";
 import * as actionTypes from "./types";
 
 const instance = axios.create({
-  baseURL: "http://192.168.100.32:8000/"
+  baseURL: "http://192.168.100.37/"
 });
 
 const setAuthToken = token => {
@@ -68,7 +68,6 @@ export const registerUser = (userData, navigation) => {
       .catch(err => console.error(err.response));
   };
 };
-
 
 export const logoutUser = () => {
   setAuthToken();

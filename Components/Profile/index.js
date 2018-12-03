@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 
-
 import * as actionTypes from "../../store/actions/";
 
 import bubbles from "../../assets/images/bubbles.png";
@@ -135,7 +134,6 @@ const mapStateToProps = state => ({
 
 const mapActionsToProps = dispatch => {
   return {
-
     fetchProfile: user => dispatch(actionTypes.fetchProfile(user)),
     fetchAddresses: user => dispatch(actionTypes.fetchAddresses()),
     updateProfile: profile => dispatch(actionTypes.updateProfile(user))
