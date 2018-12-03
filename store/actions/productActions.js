@@ -41,3 +41,10 @@ export const fetchProduct = itemID => {
 export const setProductsLoading = () => ({
   type: actionTypes.PRODUCTS_LOADING
 });
+
+export const filterProducts = query => {
+  return {
+    type: actionTypes.FILTER_PRODUCTS,
+    payload: query
+  };
+};

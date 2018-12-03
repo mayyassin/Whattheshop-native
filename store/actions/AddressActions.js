@@ -3,7 +3,7 @@ import * as actionTypes from "./types";
 import axios from "axios";
 
 const instance = axios.create({
-  baseURL: "http://192.168.100.32:8000/"
+  baseURL: "http://192.168.100.37/"
 });
 
 export const setLoading = () => ({
@@ -12,10 +12,11 @@ export const setLoading = () => ({
 
 export const createAddress = (addressDetail, navigate) => {
   return dispatch => {
-    instance
-      .post("api/address/create/", addressDetail)
+    axios
+      .post("http://192.168.100.37/api/address/create/", addressDetail)
       .then(res => res.data)
       .then(addressDetail => {
+        console.log(addressDetail);
         dispatch({
           type: actionTypes.CREATE_ADDRESS,
           payload: addressDetail

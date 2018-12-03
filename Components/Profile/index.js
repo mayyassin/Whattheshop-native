@@ -67,6 +67,7 @@ class Profile extends Component {
     )
   });
 
+
   componentDidMount() {
     this.props.fetchAddresses();
   }
@@ -144,7 +145,7 @@ class Profile extends Component {
             style={{
               backgroundColor: "#79E5BE"
             }}
-            onPress={() => this.handlePress(user)}
+            onPress={() => this.props.navigation.navigate("UpdateProfile")}
           >
             <Text style={{ fontWeight: "bold" }}>Update</Text>
           </Button>
@@ -162,8 +163,10 @@ const mapStateToProps = state => ({
 
 const mapActionsToProps = dispatch => {
   return {
-    // fetchProfile: user => dispatch(actionTypes.fetchProfile(user)),
-    fetchAddresses: () => dispatch(actionTypes.fetchAddresses()),
+
+
+    fetchProfile: user => dispatch(actionTypes.fetchProfile(user)),
+     fetchAddresses: () => dispatch(actionTypes.fetchAddresses()),
     updateProfile: profile => dispatch(actionTypes.updateProfile(user))
   };
 };

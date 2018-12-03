@@ -6,7 +6,7 @@ import { AsyncStorage } from "react-native";
 import * as actionTypes from "./types";
 
 const instance = axios.create({
-  baseURL: "http://192.168.100.32:8000/"
+  baseURL: "http://192.168.100.37/"
 });
 
 const setAuthToken = token => {
@@ -66,22 +66,6 @@ export const registerUser = (userData, navigation) => {
       .post("api/register/", userData)
       .then(() => loginUser(userData, navigation))
       .catch(err => console.error(err.response));
-  };
-};
-
-
-export const fetchProfile = () => {
-  return dispatch => {
-    instance
-      .get(`api/profile/`)
-      .then(res => res.data)
-      .then(user => {
-        dispatch({
-          type: actionTypes.FETCH_PROFILE,
-          payload: user
-        });
-      })
-      .catch(err => console.error(err));
   };
 };
 

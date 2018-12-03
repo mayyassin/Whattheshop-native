@@ -1,15 +1,10 @@
 import React, { Component } from "react";
 import { ImageBackground, View, TouchableOpacity } from "react-native";
 import { connect } from "react-redux";
-import { getProducts, fetchProduct } from "../../store/actions/productActions";
-import {
-  loginUser,
-  registerUser,
-  checkForExpiredToken
-} from "../../store/actions/authActions";
-import { logoutUser } from "../../store/actions/authActions";
-import { fetchProfile } from "../../store/actions/profileActions";
 
+import * as actionCreators from "../../store/actions";
+
+import { SearchBar } from "react-native-elements";
 import axios from "axios";
 
 // NativeBase Components
@@ -37,6 +32,9 @@ import styles from "./styles";
 import { quantityCounter } from "../../utilities/quantityCounter";
 
 class ProductList extends Component {
+  state = {
+    firstQuery: ""
+  };
   static navigationOptions = ({ navigation }) => ({
     title: "Product List",
     headerLeft: (
@@ -109,6 +107,7 @@ class ProductList extends Component {
           style={styles.background}
         >
           <View style={styles.overlay} />
+
           <ListItem style={styles.transparent}>
             <Card style={styles.transparent}>
               <CardItem style={styles.transparent}>
@@ -135,7 +134,9 @@ class ProductList extends Component {
     const { productLists } = this.props.product;
     let ListItems;
     if (productLists) {
-      ListItems = productLists.map(product => this.renderItem(product));
+      ListItems = this.props.filteredProducts.map(product =>
+        this.renderItem(product)
+      );
     }
 
     if (this.props.loading) {
@@ -143,6 +144,10 @@ class ProductList extends Component {
     } else {
       return (
         <Container>
+          <SearchBar
+            onChangeText={event => this.props.onSearch(event)}
+            placeholder="Type Here..."
+          />
           <Content>
             <List>{ListItems}</List>
           </Content>
@@ -192,6 +197,7 @@ class ProductList extends Component {
 
 const mapStateToProps = state => ({
   product: state.product,
+  filteredProducts: state.product.filteredProducts,
   quantity: quantityCounter(state.cart.list),
   user: state.auth.user,
   loading: state.product.loading
@@ -199,11 +205,12 @@ const mapStateToProps = state => ({
 
 const mapActionsToProps = dispatch => {
   return {
-    logout: () => dispatch(logoutUser()),
-    getProducts: () => dispatch(getProducts()),
-    fetchProduct: itemID => dispatch(fetchProduct(itemID)),
-    fetchProfile: user => dispatch(fetchProfile(user)),
-    check: navigation => dispatch(checkForExpiredToken(navigation))
+    logout: () => dispatch(actionCreators.logoutUser()),
+    getProducts: () => dispatch(actionCreators.getProducts()),
+    fetchProduct: itemID => dispatch(actionCreators.fetchProduct(itemID)),
+    fetchProfile: user => dispatch(actionCreators.fetchProfile(user)),
+    onSearch: query => dispatch(actionCreators.filterProducts(query)),
+     check: navigation => dispatch(actionCreators.checkForExpiredToken(navigation))
   };
 };
 
