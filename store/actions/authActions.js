@@ -70,21 +70,6 @@ export const registerUser = (userData, navigation) => {
 };
 
 
-export const fetchProfile = () => {
-  return dispatch => {
-    instance
-      .get(`api/profile/`)
-      .then(res => res.data)
-      .then(user => {
-        dispatch({
-          type: actionTypes.FETCH_PROFILE,
-          payload: user
-        });
-      })
-      .catch(err => console.error(err));
-  };
-};
-
 export const logoutUser = () => {
   setAuthToken();
   return { type: actionTypes.LOGOUT_USER };

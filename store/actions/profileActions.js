@@ -21,18 +21,20 @@ export const fetchProfile = () => {
   };
 };
 
-export const updateProfile = profile_id => {
+export const updateProfile = (profile, navigate, profile_id) => {
+  console.log(profile);
   return dispatch => {
     axios
-      .post(`http://192.168.100.37/profile/${profile_id}/update/`)
+      .put(`http://192.168.100.37/api/profile/${profile_id}/update/`, profile)
       .then(res => res.data)
-      .then(profile => {
-        console.log(profile);
+      .then(user => {
+        console.log(user);
         dispatch({
           type: actionTypes.UPDATE_PROFILE,
           payload: profile
         });
+        navigate.goBack();
       })
-      .catch(err => console.error(err));
+      .catch(err => console.error(err.response));
   };
 };

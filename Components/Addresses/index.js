@@ -33,10 +33,6 @@ class AddressForm extends Component {
     title: "Address Form"
   };
 
-  AddAddress() {
-    this.props.createAddress(this.state, this.props.navigation);
-  }
-
   submitHandler(e) {
     this.props.createAddress(this.state, this.props.navigation);
   }
@@ -101,7 +97,6 @@ class AddressForm extends Component {
                       name="area"
                       type="text"
                       autoCorrect={false}
-                      secureTextEntry
                       autoCapitalize="none"
                       onChangeText={value => this.setState({ area: value })}
                     />
