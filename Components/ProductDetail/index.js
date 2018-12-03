@@ -13,7 +13,8 @@ import {
   List,
   ListItem,
   Picker,
-  Content
+  Content,
+  Footer
 } from "native-base";
 
 // Style
@@ -64,7 +65,7 @@ class ProductDetail extends Component {
     }
   }
 
-  changeDrink(value) {
+  changeItem(value) {
     this.setState({
       name: value
     });
@@ -82,7 +83,7 @@ class ProductDetail extends Component {
     let item = {
       name: name,
       option: option,
-      quantity: 1
+      quantity: quantity
     };
     this.props.addItemToCart(item, list);
   }
@@ -90,8 +91,8 @@ class ProductDetail extends Component {
   render() {
     const productList = this.props.navigation.getParam("product", {});
     return (
-      <Content>
-        <ImageBackground source={bubbles} style={styles.background}>
+      <ImageBackground source={bubbles} style={styles.background}>
+        <Content>
           <List>
             <ListItem style={styles.top}>
               <Left>
@@ -100,7 +101,7 @@ class ProductDetail extends Component {
                   {productList.category + "\n"}
                   {productList.price + " KD" + "\n"}
                   {productList.description + "\n"}
-                  {productList.quantity + "\n"}
+
                   <Text note>{productList.location}</Text>
                 </Text>
               </Left>
@@ -117,7 +118,7 @@ class ProductDetail extends Component {
                   mode="dropdown"
                   style={{ width: 150 }}
                   selectedValue={this.state.name}
-                  onValueChange={this.changeDrink.bind(this)}
+                  onValueChange={this.changeItem.bind(this)}
                 >
                   <Picker.Item label="Product" value="Product" />
                   <Picker.Item label="Lattee" value="Lattee" />
@@ -139,22 +140,31 @@ class ProductDetail extends Component {
                 <NumericInput
                   label="quantity"
                   type="up-down"
-                  onChange={value => console.log(value)}
+                  onChange={value => this.changeItem.bind(this)}
                 />
               </Body>
             </ListItem>
+          </List>
+          <Footer
+            style={{
+              width: "100%",
+              alignSelf: "center",
+              justifyContent: "center",
+              backgroundColor: "transparent"
+            }}
+          >
             <Button
               full
               style={{
-                backgroundColor: "#79E5BE"
+                backgroundColor: "#F32BBD"
               }}
               onPress={() => this.handleAdd()}
             >
               <Text>Add</Text>
             </Button>
-          </List>
-        </ImageBackground>
-      </Content>
+          </Footer>
+        </Content>
+      </ImageBackground>
     );
   }
 }

@@ -1,9 +1,15 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 
-
-import * as actionTypes from "../../store/actions/";
-
+import {
+  loginUser,
+  registerUser,
+  checkForExpiredToken
+} from "../../store/actions/authActions";
+import {
+  fetchProfile,
+  updateProfile
+} from "../../store/actions/profileActions";
 import bubbles from "../../assets/images/bubbles.png";
 // NativeBase Components
 import {
@@ -31,9 +37,9 @@ import { ImageBackground, View, TouchableOpacity } from "react-native";
 
 import styles from "./styles";
 
-class Profile extends Component {
+class UpdateProfile extends Component {
   static navigationOptions = ({ navigation }) => ({
-    title: "Profile",
+    title: "UpdateProfile",
     headerLeft: (
       <Button
         light
@@ -68,12 +74,6 @@ class Profile extends Component {
     )
   });
 
-  handlePress(product) {
-    this.props.navigation.navigate("UpdateProfile", {
-      user: user
-    });
-  }
-
   render() {
     const profile = this.props.profile;
     return (
@@ -100,15 +100,6 @@ class Profile extends Component {
               <Body />
             </ListItem>
           </List>
-          <Button
-            full
-            style={{
-              backgroundColor: "#79E5BE"
-            }}
-            onPress={() => this.props.navigation.navigate("AddressForm")}
-          >
-            <Text style={{ fontWeight: "bold" }}>Add Address</Text>
-          </Button>
         </Content>
         <Footer
           style={{
@@ -123,7 +114,7 @@ class Profile extends Component {
             style={{
               backgroundColor: "#79E5BE"
             }}
-            onPress={() => this.handlePress(user)}
+            onPress={() => this.handleAdd(updateProfile(this.props.user))}
           >
             <Text style={{ fontWeight: "bold" }}>Update</Text>
           </Button>
@@ -141,14 +132,11 @@ const mapStateToProps = state => ({
 
 const mapActionsToProps = dispatch => {
   return {
-
-    fetchProfile: user => dispatch(actionTypes.fetchProfile(user)),
-    fetchAddresses: user => dispatch(actionTypes.fetchAddresses()),
-    updateProfile: profile => dispatch(actionTypes.updateProfile(user))
+    updateProfile: user => dispatch(updateProfile(user))
   };
 };
 
 export default connect(
   mapStateToProps,
   mapActionsToProps
-)(Profile);
+)(UpdateProfile);
