@@ -10,3 +10,5 @@ export const CHECKOUT = "CHECKOUT";
 export const SET_CURRENT_USER = "SET_CURRENT_USER;";
 export const SET_ERROR = "SET_ERROR";
 export const LOGOUT_USER = "LOGOUT_USER";
+export const CREAT_ADDRESS = "CREAT_ADDRESS";
+export const FETCH_ADDRESSES = "FETCH_ADDRESSES";
