@@ -2,6 +2,11 @@ import * as actionTypes from "./types";
 
 import axios from "axios";
 
+
+const instance = axios.create({
+  baseURL: "http://192.168.100.32:8000/"
+});
+
 export const setLoading = () => ({
   type: actionTypes.SET_ADDRESS_LOADING
 });
@@ -26,8 +31,8 @@ export const createAddress = (addressDetail, navigate) => {
 export const fetchAddresses = () => {
   return dispatch => {
     dispatch(setLoading());
-    axios
-      .get("http://192.168.100.37/api/address/list/")
+    instance
+      .get("api/address/list/")
       .then(res => res.data)
       .then(addresses => {
         return dispatch({
