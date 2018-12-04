@@ -9,17 +9,15 @@ import { Container } from "native-base";
 import styles from "./styles";
 
 // Actions
-import { getProducts, fetchProduct } from "../../store/actions/productActions";
-import { checkForExpiredToken } from "../../store/actions/authActions";
+
 // Navigation
 import Nav from "../Navigation";
 
 class HomePage extends Component {
-  componentDidMount() {
-    const { productLists } = this.props.product;
-    if (!productLists) this.props.getProducts();
-    this.props.check();
-  }
+  //   componentDidMount() {
+  //     const { productLists } = this.props.product;
+  //     if (!productLists) this.props.getProducts();
+  //   }
 
   render() {
     return (
@@ -35,8 +33,7 @@ const mapStateToProps = state => ({
 
 const mapActionsToProps = dispatch => ({
   getProducts: () => dispatch(getProducts()),
-  fetchProduct: () => dispatch(fetchProduct()),
-  check: () => dispatch(checkForExpiredToken())
+  fetchProduct: () => dispatch(fetchProduct())
 });
 
 export default connect(

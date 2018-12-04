@@ -21,7 +21,30 @@ const setAuthToken = token => {
   }
 };
 
-export const checkForExpiredToken = navigation => {
+// export const checkForExpiredToken = navigation => {
+//   return dispatch => {
+//     // Get token
+//     AsyncStorage.getItem("token").then(token => {
+//       if (token) {
+//         const currentTime = Date.now() / 1000;
+
+//         // Decode token and get user info
+//         const user = jwt_decode(token);
+
+//         // Check token expiration
+//         if (user.exp >= currentTime) {
+//           // Set auth token header
+//           setAuthToken(token).then(() => dispatch(setCurrentUser(user)));
+//           navigation.navigate("ProductList");
+//         } else {
+//           dispatch(logout());
+//         }
+//       }
+//     });
+//   };
+// };
+
+export const checkForExpiredToken = () => {
   return dispatch => {
     // Get token
     AsyncStorage.getItem("token").then(token => {
@@ -35,7 +58,6 @@ export const checkForExpiredToken = navigation => {
         if (user.exp >= currentTime) {
           // Set auth token header
           setAuthToken(token).then(() => dispatch(setCurrentUser(user)));
-          navigation.navigate("ProductList");
         } else {
           dispatch(logoutUser());
         }
@@ -46,6 +68,7 @@ export const checkForExpiredToken = navigation => {
 
 export const loginUser = (userData, navigation) => {
   return dispatch => {
+
     instance
       .post("api/login/", userData)
       .then(res => res.data)
@@ -62,12 +85,14 @@ export const loginUser = (userData, navigation) => {
 
 export const registerUser = (userData, navigation) => {
   return dispatch => {
+
     instance
       .post("api/register/", userData)
       .then(() => loginUser(userData, navigation))
       .catch(err => console.error(err.response));
   };
 };
+
 
 export const logoutUser = () => {
   setAuthToken();

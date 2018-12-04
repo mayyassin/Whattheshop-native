@@ -197,10 +197,12 @@ class ProductList extends Component {
 
 const mapStateToProps = state => ({
   product: state.product,
+
+  quantity: quantityCounter(state.cart.cart),
   filteredProducts: state.product.filteredProducts,
-  quantity: quantityCounter(state.cart.list),
+
   user: state.auth.user,
-  loading: state.product.loading
+  loading: state.product.loadingA
 });
 
 const mapActionsToProps = dispatch => {
