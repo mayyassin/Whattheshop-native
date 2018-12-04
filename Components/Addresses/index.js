@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 
 import { createAddress } from "../../store/actions/AddressActions";
+import { setAddress } from "../../store/actions/cartActions";
 import bubbles from "../../assets/images/bubbles.png";
 import { ImageBackground, View, TouchableOpacity } from "react-native";
 import styles from "./styles";
@@ -249,7 +250,8 @@ class AddressForm extends Component {
 const mapActionsToProps = dispatch => {
   return {
     createAddress: (address, navigation) =>
-      dispatch(createAddress(address, navigation))
+      dispatch(createAddress(address, navigation)),
+    setAddress: id => dispatch(setAddress(id))
   };
 };
 

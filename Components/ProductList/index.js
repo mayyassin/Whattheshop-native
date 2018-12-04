@@ -79,6 +79,7 @@ class ProductList extends Component {
     this.props.check(this.props.navigation);
     if (this.props.user) {
       this.props.fetchProfile();
+      this.props.fetchAddresses();
     }
 
     this.props.navigation.setParams({ quantity: this.props.quantity });
@@ -94,6 +95,7 @@ class ProductList extends Component {
 
     if (this.props.user !== prevProps.user) {
       this.props.fetchProfile();
+      this.props.fetchAddresses();
     }
   }
 
@@ -271,7 +273,9 @@ const mapActionsToProps = dispatch => {
     onSearch: query => dispatch(actionCreators.filterProducts(query)),
     categoryChoice: query => dispatch(actionCreators.filterCategory(query)),
     check: navigation =>
-      dispatch(actionCreators.checkForExpiredToken(navigation))
+      dispatch(actionCreators.checkForExpiredToken(navigation)),
+    fetchAddresses: () => dispatch(actionCreators.fetchAddresses())
+
   };
 };
 
