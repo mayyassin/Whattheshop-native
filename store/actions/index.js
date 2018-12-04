@@ -1,4 +1,4 @@
-export { login, logout, signup, checkForExpiredToken } from "./authActions";
+export { login, logoutUser, signup, checkForExpiredToken } from "./authActions";
 
 // export { setErrors } from "./errors";
 
@@ -11,10 +11,9 @@ export {
 
 export { fetchAddresses, createAddress } from "./AddressActions";
 
-
 export { fetchProfile, updateProfile } from "./profileActions";
 
-
+//
 // export {
 //   addProduct,
 //   checkout,
@@ -22,4 +21,4 @@ export { fetchProfile, updateProfile } from "./profileActions";
 //   setAddress
 // } from "./CartActions";
 
-// export { fetchOrders, fetchOrder } from "./orderActions";
+export { fetchOrders, fetchOrder } from "./orderActions";

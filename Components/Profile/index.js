@@ -69,10 +69,10 @@ class Profile extends Component {
   });
 
 
-  // componentDidMount() {
-  //   this.props.fetchProfile(this.props.user.user_id);
-  // }
   componentDidMount() {
+    if (!this.props.user) {
+      this.props.navigation.replace("Login");
+    }
     this.props.navigation.setParams({ quantity: this.props.quantity });
     this.props.fetchAddresses();
   }
@@ -89,78 +89,82 @@ handlePress(product) {
   }
   render() {
     const profile = this.props.profile;
-    return (
-      <ImageBackground source={bubbles} style={styles.background}>
-        <Content>
-          <List>
-            <ListItem style={styles.top}>
-              <Left>
-                <Text style={styles.text}>
-                  Name: {profile.firstname + " " + profile.lastname + "\n"}
-                  Date of birth: {profile.dob + "\n"}
-                  Email: {profile.email + "\n"}
-                  Phone number: {profile.number + "\n"}
-                </Text>
-              </Left>
+    if (!this.props.user) {
+      return null;
+    } else {
+      return (
+        <ImageBackground source={bubbles} style={styles.background}>
+          <Content>
+            <List>
+              <ListItem style={styles.top}>
+                <Left>
+                  <Text style={styles.text}>
+                    Name: {profile.firstname + " " + profile.lastname + "\n"}
+                    Date of birth: {profile.dob + "\n"}
+                    Email: {profile.email + "\n"}
+                    Phone number: {profile.number + "\n"}
+                  </Text>
+                </Left>
 
-              <Body />
-              <Right>
-                <Thumbnail bordered source={{ uri: profile.profile_pic }} />
-              </Right>
-            </ListItem>
-            <ListItem style={{ borderBottomWidth: 0 }}>
-              <Left />
-              <Body />
-            </ListItem>
-          </List>
-          <Button
-            full
+                <Body />
+                <Right>
+                  <Thumbnail bordered source={{ uri: profile.profile_pic }} />
+                </Right>
+              </ListItem>
+              <ListItem style={{ borderBottomWidth: 0 }}>
+                <Left />
+                <Body />
+              </ListItem>
+            </List>
+            <Button
+              full
+              style={{
+                backgroundColor: "#79E5BE"
+              }}
+              onPress={() => this.props.navigation.navigate("AddressForm")}
+            >
+              <Text style={{ fontWeight: "bold" }}>Add Address</Text>
+            </Button>
+            <Button
+              full
+              style={{
+                backgroundColor: "#79E5BE"
+              }}
+              onPress={() => this.props.navigation.navigate("AddressList")}
+            >
+              <Text style={{ fontWeight: "bold" }}>Check Addresses</Text>
+            </Button>
+            <Button
+              full
+              style={{
+                backgroundColor: "#79E5BE"
+              }}
+              onPress={() => this.props.navigation.navigate("OrdersList")}
+            >
+              <Text style={{ fontWeight: "bold" }}>Check Order History</Text>
+            </Button>
+          </Content>
+          <Footer
             style={{
-              backgroundColor: "#79E5BE"
+              width: "100%",
+              alignSelf: "center",
+              justifyContent: "center",
+              backgroundColor: "transparent"
             }}
-            onPress={() => this.props.navigation.navigate("AddressForm")}
           >
-            <Text style={{ fontWeight: "bold" }}>Add Address</Text>
-          </Button>
-          <Button
-            full
-            style={{
-              backgroundColor: "#79E5BE"
-            }}
-            onPress={() => this.props.navigation.navigate("AddressList")}
-          >
-            <Text style={{ fontWeight: "bold" }}>Check Addresses</Text>
-          </Button>
-          <Button
-            full
-            style={{
-              backgroundColor: "#79E5BE"
-            }}
-            onPress={() => this.props.navigation.navigate("OrdersList")}
-          >
-            <Text style={{ fontWeight: "bold" }}>Check Order History</Text>
-          </Button>
-        </Content>
-        <Footer
-          style={{
-            width: "100%",
-            alignSelf: "center",
-            justifyContent: "center",
-            backgroundColor: "transparent"
-          }}
-        >
-          <Button
-            full
-            style={{
-              backgroundColor: "#79E5BE"
-            }}
-            onPress={() => this.props.navigation.navigate("UpdateProfile")}
-          >
-            <Text style={{ fontWeight: "bold" }}>Update</Text>
-          </Button>
-        </Footer>
-      </ImageBackground>
-    );
+            <Button
+              full
+              style={{
+                backgroundColor: "#79E5BE"
+              }}
+              onPress={() => this.props.navigation.navigate("UpdateProfile")}
+            >
+              <Text style={{ fontWeight: "bold" }}>Update</Text>
+            </Button>
+          </Footer>
+        </ImageBackground>
+      );
+    }
   }
 }
 
@@ -174,10 +178,8 @@ r
 
 const mapActionsToProps = dispatch => {
   return {
-
-
     fetchProfile: user => dispatch(actionTypes.fetchProfile(user)),
-     fetchAddresses: () => dispatch(actionTypes.fetchAddresses()),
+    fetchAddresses: () => dispatch(actionTypes.fetchAddresses()),
     updateProfile: profile => dispatch(actionTypes.updateProfile(user))
   };
 };

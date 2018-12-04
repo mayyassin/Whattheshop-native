@@ -4,19 +4,23 @@ import bubbles from "../../assets/images/bubbles.png";
 const styles = StyleSheet.create({
   text: {
     fontWeight: "bold",
-    color: "black",
-    fontSize: 15,
-    flex: 5,
-    flexWrap: "wrap",
+    color: "white",
+    fontSize: 25,
+    flex: 3,
     justifyContent: "center",
     alignItems: "center"
+  },
+  bodyText: {
+    flex: 1,
+    backgroundColor: "rgba(0,0,0,0.6)"
   },
   divider: {
     borderBottomColor: "black",
     borderBottomWidth: 1
   },
   top: {
-    marginLeft: 0
+    marginLeft: 0,
+    flex: 3
     // backgroundImage: bubbles,
   },
   middleText: {
@@ -37,7 +41,8 @@ const styles = StyleSheet.create({
     flex: 1
   },
   transparent: {
-    flexDirection: "row"
+    flexDirection: "row",
+    backgroundColor: "transparent"
   }
 });
 

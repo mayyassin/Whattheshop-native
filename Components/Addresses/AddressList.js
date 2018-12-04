@@ -35,7 +35,7 @@ import { quantityCounter } from "../../utilities/quantityCounter";
 
 class AddressList extends Component {
   static navigationOptions = ({ navigation }) => ({
-    title: "Product List",
+    title: "Address List",
     headerLeft: (
       <Button light transparent onPress={() => navigation.navigate("Profile")}>
         <Text>
@@ -81,14 +81,6 @@ class AddressList extends Component {
                   {adress.street}
                   {adress.area}
                 </Text>
-
-                <Text style={styles.text} />
-
-                <Text style={styles.text} />
-
-                <Text style={styles.text} />
-
-                <Text style={styles.text} />
               </CardItem>
             </Card>
           </ListItem>
