@@ -68,10 +68,20 @@ class OrdersList extends Component {
   componentDidMount() {
     this.props.fetchOrders();
   }
+
+  handlePress(order) {
+    this.props.navigation.navigate("OrderDetail", {
+      order: order
+    });
+  }
+
   renderItem(order) {
-    console.log(order);
     return (
-      <TouchableOpacity key={order.id}>
+      <TouchableOpacity
+        style={{ backgroundColor: "black", padding: 15 }}
+        key={order.id}
+        onPress={() => this.handlePress(order)}
+      >
         <ImageBackground source={bubbles} style={styles.background}>
           <View style={styles.overlay} />
           <ListItem style={styles.transparent}>
@@ -83,14 +93,6 @@ class OrdersList extends Component {
                   {"\n"}
                   Status:{order.status}
                 </Text>
-
-                {/*<Text style={styles.text} />
-
-                <Text style={styles.text} />
-
-                <Text style={styles.text} />
-
-                <Text style={styles.text} />*/}
               </CardItem>
             </Card>
           </ListItem>
@@ -100,10 +102,10 @@ class OrdersList extends Component {
   }
 
   render() {
-    const ordersList = this.props.orders;
+    const orders = this.props.orders;
     let ListItems;
-    if (ordersList) {
-      ListItems = ordersList.map(order => this.renderItem(order));
+    if (orders) {
+      ListItems = orders.map(order => this.renderItem(order));
     }
 
     if (this.props.loading) {
@@ -162,7 +164,7 @@ const mapStateToProps = state => ({
   product: state.product,
   quantity: quantityCounter(state.cart.list),
   user: state.auth.user,
-  loading: state.orders.loading,
+  loading: state.orders.loadingA,
   orders: state.orders.orders
 });
 
