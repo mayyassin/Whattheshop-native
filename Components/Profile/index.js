@@ -33,6 +33,7 @@ import {
 import { ImageBackground, View, TouchableOpacity } from "react-native";
 
 import styles from "./styles";
+import { quantityCounter } from "../../utilities/quantityCounter";
 
 class Profile extends Component {
   static navigationOptions = ({ navigation }) => ({
@@ -74,6 +75,15 @@ class Profile extends Component {
   // componentDidMount() {
   //   this.props.fetchProfile(this.props.user.user_id);
   // }
+  componentDidMount() {
+    this.props.navigation.setParams({ quantity: this.props.quantity });
+  }
+
+  componentDidUpdate(prevProps) {
+    if (prevProps.quantity != this.props.quantity) {
+      this.props.navigation.setParams({ quantity: this.props.quantity });
+    }
+  }
   render() {
     const profile = this.props.profile;
     return (
@@ -127,7 +137,8 @@ class Profile extends Component {
 const mapStateToProps = state => ({
   user: state.auth.user,
   profile: state.auth.profile,
-  isAuthenticated: state.auth.isAuthenticated
+  isAuthenticated: state.auth.isAuthenticated,
+  quantity: quantityCounter(state.cart.cart)
 });
 
 const mapActionsToProps = dispatch => {

@@ -58,7 +58,7 @@ class ProductList extends Component {
         onPress={() => navigation.navigate("ProductCart")}
       >
         <Text>
-          {/* {navigation.getParam("quantity", 0)}{" "} */}
+          {navigation.getParam("quantity", 0)}{" "}
           <Icon
             type="Feather"
             name="shopping-cart"
@@ -191,7 +191,7 @@ class ProductList extends Component {
 
 const mapStateToProps = state => ({
   product: state.product,
-  // quantity: quantityCounter(state.cart.list),
+  quantity: quantityCounter(state.cart.cart),
   user: state.auth.user,
   loading: state.product.loadingA
 });
@@ -201,7 +201,8 @@ const mapActionsToProps = dispatch => {
     logout: () => dispatch(logoutUser()),
     getProducts: () => dispatch(getProducts()),
     fetchProduct: itemID => dispatch(fetchProduct(itemID)),
-    fetchProfile: user => dispatch(fetchProfile(user))
+    fetchProfile: user => dispatch(fetchProfile(user)),
+    check: navigation => dispatch(checkForExpiredToken(navigation))
   };
 };
 

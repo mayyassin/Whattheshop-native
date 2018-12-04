@@ -20,7 +20,7 @@ const reducer = (state = initialState, action) => {
       } else {
         cart = state.cart.concat(newProduct);
       }
-      console.log(newProduct);
+
       // console.log(cartItem);
 
       return {

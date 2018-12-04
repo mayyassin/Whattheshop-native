@@ -15,7 +15,7 @@ export const getProducts = () => dispatch => {
         payload: products
       });
     })
-    .catch(err => console.log(err));
+    .catch(err => console.error(err));
 };
 
 export const fetchProduct = itemID => {

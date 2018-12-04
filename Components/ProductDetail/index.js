@@ -34,14 +34,21 @@ class ProductDetail extends Component {
     this.handleChange = this.handleChange.bind(this);
     this.handleAdd = this.handleAdd.bind(this);
   }
+
   componentDidMount() {
+    this.props.navigation.setParams({ cartQuantity: this.props.cartQuantity });
     const product = this.props.navigation.getParam("product", {});
     this.props.fetchProduct(product.id);
-    // this.props.navigation.setParams({ quantity: this.state.quantity });
   }
 
+  componentDidUpdate(prevProps) {
+    if (prevProps.cartQuantity != this.props.cartQuantity) {
+      this.props.navigation.setParams({
+        cartQuantity: this.props.cartQuantity
+      });
+    }
+  }
   handleChange(number) {
-    console.log(number);
     this.setState({ quantity: number });
   }
 
@@ -63,7 +70,7 @@ class ProductDetail extends Component {
         onPress={() => navigation.navigate("ProductCart")}
       >
         <Text>
-          {navigation.getParam("quantity", 0)}{" "}
+          {navigation.getParam("cartQuantity", 0)}{" "}
           <Icon
             type="Feather"
             name="shopping-cart"
@@ -73,12 +80,6 @@ class ProductDetail extends Component {
       </Button>
     )
   });
-
-  // componentDidUpdate(prevProps) {
-  //   if (prevProps.quantity != this.props.quantity) {
-  //     this.props.navigation.setParams({ quantity: this.props.quantity });
-  //   }
-  // }
 
   // changeDrink(value) {
   //   this.setState({
@@ -145,7 +146,8 @@ class ProductDetail extends Component {
 const mapStateToProps = state => ({
   item: state.product.productList,
   loading: state.product.loadingB,
-  productState: state.product
+  productState: state.product,
+  cartQuantity: quantityCounter(state.cart.cart)
 });
 
 const mapActionsToProps = dispatch => ({

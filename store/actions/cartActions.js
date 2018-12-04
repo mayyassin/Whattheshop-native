@@ -12,7 +12,6 @@ const instance = axios.create({
 // });
 
 export const checkout = cartWithAddress => {
-  console.log(cartWithAddress);
   return dispatch => {
     instance
       .post("api/order/create/", cartWithAddress)

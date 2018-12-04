@@ -24,6 +24,7 @@ import {
   Header,
   Container
 } from "native-base";
+import { quantityCounter } from "../../utilities/quantityCounter";
 
 class Login extends Component {
   constructor(props) {
