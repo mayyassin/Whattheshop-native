@@ -1,10 +1,12 @@
 import React, { Component } from "react";
 import { ImageBackground, View, TouchableOpacity } from "react-native";
 import { connect } from "react-redux";
+import { getProducts, fetchProduct } from "../../store/actions/productActions";
+import * as actionTypes from "../../store/actions/authActions";
+import { logoutUser } from "../../store/actions/authActions";
+import { fetchProfile } from "../../store/actions/profileActions";
+import bubbles from "../../assets/images/bubbles.png";
 
-import * as actionCreators from "../../store/actions";
-
-import { SearchBar } from "react-native-elements";
 import axios from "axios";
 
 // NativeBase Components
@@ -31,10 +33,7 @@ import styles from "./styles";
 // Actions
 import { quantityCounter } from "../../utilities/quantityCounter";
 
-class ProductList extends Component {
-  state = {
-    firstQuery: ""
-  };
+class AddressList extends Component {
   static navigationOptions = ({ navigation }) => ({
     title: "Product List",
     headerLeft: (
@@ -67,61 +66,29 @@ class ProductList extends Component {
     )
   });
 
-  componentDidMount() {
-    this.props.check(this.props.navigation);
-    if (this.props.user) {
-      this.props.fetchProfile();
-    }
-
-    this.props.navigation.setParams({ quantity: this.props.quantity });
-    if (this.props.product.id) {
-      this.props.fetchProduct(product.id);
-    }
-  }
-
-  componentDidUpdate(prevProps) {
-    if (prevProps.quantity != this.props.quantity) {
-      this.props.navigation.setParams({ quantity: this.props.quantity });
-    }
-
-    if (this.props.user !== prevProps.user) {
-      this.props.fetchProfile();
-    }
-  }
-
-  handlePress(product) {
-    this.props.navigation.navigate("ProductDetail", {
-      product: product,
-      quantity: this.props.quantity
-    });
-  }
-
-  renderItem(product) {
+  renderItem(adress) {
     return (
-      <TouchableOpacity
-        key={product.id}
-        onPress={() => this.handlePress(product)}
-      >
-        <ImageBackground
-          source={{ uri: product.img }}
-          style={styles.background}
-        >
+      <TouchableOpacity key={adress.id}>
+        <ImageBackground source={bubbles} style={styles.background}>
           <View style={styles.overlay} />
-
           <ListItem style={styles.transparent}>
             <Card style={styles.transparent}>
               <CardItem style={styles.transparent}>
-                <Left>
-                  <Thumbnail
-                    bordered
-                    source={{ uri: product.img }}
-                    style={styles.thumbnail}
-                  />
-                  <Text style={styles.text}>{product.name}</Text>
-                  <Text note style={styles.text}>
-                    {product.distance}
-                  </Text>
-                </Left>
+                <Text style={styles.text}>
+                  Governorate: {adress.governorate}
+                  {adress.area}
+                  {adress.block}
+                  {adress.street}
+                  {adress.area}
+                </Text>
+
+                <Text style={styles.text} />
+
+                <Text style={styles.text} />
+
+                <Text style={styles.text} />
+
+                <Text style={styles.text} />
               </CardItem>
             </Card>
           </ListItem>
@@ -131,12 +98,10 @@ class ProductList extends Component {
   }
 
   render() {
-    const { productLists } = this.props.product;
+    const addressList = this.props.addresses;
     let ListItems;
-    if (productLists) {
-      ListItems = this.props.filteredProducts.map(product =>
-        this.renderItem(product)
-      );
+    if (addressList) {
+      ListItems = addressList.map(address => this.renderItem(address));
     }
 
     if (this.props.loading) {
@@ -144,10 +109,6 @@ class ProductList extends Component {
     } else {
       return (
         <Container>
-          <SearchBar
-            onChangeText={event => this.props.onSearch(event)}
-            placeholder="Type Here..."
-          />
           <Content>
             <List>{ListItems}</List>
           </Content>
@@ -197,26 +158,17 @@ class ProductList extends Component {
 
 const mapStateToProps = state => ({
   product: state.product,
-
-  quantity: quantityCounter(state.cart.cart),
-  filteredProducts: state.product.filteredProducts,
-
+  quantity: quantityCounter(state.cart.list),
   user: state.auth.user,
-  loading: state.product.loadingA
+  loading: state.product.loading,
+  addresses: state.address.addresses
 });
 
 const mapActionsToProps = dispatch => {
-  return {
-    logout: () => dispatch(actionCreators.logoutUser()),
-    getProducts: () => dispatch(actionCreators.getProducts()),
-    fetchProduct: itemID => dispatch(actionCreators.fetchProduct(itemID)),
-    fetchProfile: user => dispatch(actionCreators.fetchProfile(user)),
-    onSearch: query => dispatch(actionCreators.filterProducts(query)),
-     check: navigation => dispatch(actionCreators.checkForExpiredToken(navigation))
-  };
+  return {};
 };
 
 export default connect(
   mapStateToProps,
   mapActionsToProps
-)(ProductList);
+)(AddressList);

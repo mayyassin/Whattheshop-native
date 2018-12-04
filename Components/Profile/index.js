@@ -1,12 +1,8 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 
-import {
-  loginUser,
-  registerUser,
-  checkForExpiredToken,
-  fetchProfile
-} from "../../store/actions/authActions";
+import * as actionTypes from "../../store/actions/";
+
 import bubbles from "../../assets/images/bubbles.png";
 // NativeBase Components
 import {
@@ -72,17 +68,24 @@ class Profile extends Component {
     )
   });
 
+
   // componentDidMount() {
   //   this.props.fetchProfile(this.props.user.user_id);
   // }
   componentDidMount() {
     this.props.navigation.setParams({ quantity: this.props.quantity });
+    this.props.fetchAddresses();
   }
 
   componentDidUpdate(prevProps) {
     if (prevProps.quantity != this.props.quantity) {
       this.props.navigation.setParams({ quantity: this.props.quantity });
     }
+  }
+handlePress(product) {
+    this.props.navigation.navigate("UpdateProfile", {
+      user: user
+    });
   }
   render() {
     const profile = this.props.profile;
@@ -110,6 +113,33 @@ class Profile extends Component {
               <Body />
             </ListItem>
           </List>
+          <Button
+            full
+            style={{
+              backgroundColor: "#79E5BE"
+            }}
+            onPress={() => this.props.navigation.navigate("AddressForm")}
+          >
+            <Text style={{ fontWeight: "bold" }}>Add Address</Text>
+          </Button>
+          <Button
+            full
+            style={{
+              backgroundColor: "#79E5BE"
+            }}
+            onPress={() => this.props.navigation.navigate("AddressList")}
+          >
+            <Text style={{ fontWeight: "bold" }}>Check Addresses</Text>
+          </Button>
+          <Button
+            full
+            style={{
+              backgroundColor: "#79E5BE"
+            }}
+            onPress={() => this.props.navigation.navigate("OrdersList")}
+          >
+            <Text style={{ fontWeight: "bold" }}>Check Order History</Text>
+          </Button>
         </Content>
         <Footer
           style={{
@@ -124,7 +154,7 @@ class Profile extends Component {
             style={{
               backgroundColor: "#79E5BE"
             }}
-            onPress={() => this.handleAdd()}
+            onPress={() => this.props.navigation.navigate("UpdateProfile")}
           >
             <Text style={{ fontWeight: "bold" }}>Update</Text>
           </Button>
@@ -139,11 +169,16 @@ const mapStateToProps = state => ({
   profile: state.auth.profile,
   isAuthenticated: state.auth.isAuthenticated,
   quantity: quantityCounter(state.cart.cart)
+r
 });
 
 const mapActionsToProps = dispatch => {
   return {
-    fetchProfile: user => dispatch(fetchProfile(user))
+
+
+    fetchProfile: user => dispatch(actionTypes.fetchProfile(user)),
+     fetchAddresses: () => dispatch(actionTypes.fetchAddresses()),
+    updateProfile: profile => dispatch(actionTypes.updateProfile(user))
   };
 };
 

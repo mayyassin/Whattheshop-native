@@ -8,14 +8,23 @@ import ProductCart from "../ProductCart";
 import Login from "../Login";
 import HomePage from "../HomePage";
 import Profile from "../Profile";
+import UpdateProfile from "../UpdateProfile";
+
+import AddressForm from "../Addresses";
+import AddressList from "../Addresses/AddressList";
+import OrdersList from "../Orders/OrdersList";
 
 export default createStackNavigator(
   {
     Profile: Profile,
+    UpdateProfile: UpdateProfile,
     ProductList: ProductList,
     ProductDetail: ProductDetail,
     ProductCart: ProductCart,
-    Login: Login
+    Login: Login,
+    AddressForm: AddressForm,
+    AddressList: AddressList,
+    OrdersList: OrdersList
   },
   {
     initialRouteName: "ProductList",

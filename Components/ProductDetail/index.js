@@ -13,7 +13,8 @@ import {
   List,
   ListItem,
   Picker,
-  Content
+  Content,
+  Footer
 } from "native-base";
 
 // Style
@@ -81,6 +82,7 @@ class ProductDetail extends Component {
     )
   });
 
+
   // changeDrink(value) {
   //   this.setState({
   //     name: value
@@ -141,6 +143,7 @@ class ProductDetail extends Component {
         </Content>
       );
     }
+
   }
 }
 const mapStateToProps = state => ({

@@ -1,12 +1,13 @@
 import { StyleSheet } from "react-native";
+import bubbles from "../../assets/images/bubbles.png";
 
 const styles = StyleSheet.create({
   text: {
-    color: "#5B2C6F",
-    fontSize: 15,
     fontWeight: "bold",
-    marginLeft: 16,
-
+    color: "black",
+    fontSize: 15,
+    flex: 5,
+    flexWrap: "wrap",
     justifyContent: "center",
     alignItems: "center"
   },
@@ -16,6 +17,7 @@ const styles = StyleSheet.create({
   },
   top: {
     marginLeft: 0
+    // backgroundImage: bubbles,
   },
   middleText: {
     color: "white",
@@ -34,9 +36,8 @@ const styles = StyleSheet.create({
   background: {
     flex: 1
   },
-  container: {
-    flex: 1,
-    justifyContent: "flex-end"
+  transparent: {
+    flexDirection: "row"
   }
 });
 

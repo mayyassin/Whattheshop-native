@@ -3,8 +3,12 @@ import * as actionTypes from "../actions/types";
 const initialState = {
   productLists: null,
   productList: null,
+
   loadingA: true,
-  loadingB: true
+  loadingB: true,
+  filteredProducts: [],
+
+
 };
 
 export default function(state = initialState, action) {
@@ -13,7 +17,11 @@ export default function(state = initialState, action) {
       return {
         ...state,
         productLists: action.payload,
+
+        filteredProducts: action.payload,
         loadingA: false
+      };
+  
       };
     // case actionTypes.GET_PRODUCT_BY_ID:
     //   return {
@@ -35,6 +43,14 @@ export default function(state = initialState, action) {
       return {
         ...state,
         loadingB: true
+      };
+    case actionTypes.FILTER_PRODUCTS:
+      return {
+        ...state,
+        filteredProducts: state.productLists.filter(product => {
+          return `${product.name}`.toLowerCase().includes(action.payload);
+        }),
+        loading: false
       };
     default:
       return state;
