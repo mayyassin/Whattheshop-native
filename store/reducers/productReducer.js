@@ -7,7 +7,8 @@ const initialState = {
   loadingA: true,
   loadingB: true,
   filteredProducts: [],
-
+  filteredCategory: [],
+  loading: false
 
 };
 
@@ -49,6 +50,16 @@ export default function(state = initialState, action) {
         ...state,
         filteredProducts: state.productLists.filter(product => {
           return `${product.name}`.toLowerCase().includes(action.payload);
+        }),
+        loading: false
+      };
+    case actionTypes.FILTER_CATEGORY:
+      return {
+        ...state,
+        filteredProducts: state.productLists.filter(product => {
+          return `${product.category}`
+            .toLowerCase()
+            .includes(action.payload.toLowerCase());
         }),
         loading: false
       };

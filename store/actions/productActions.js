@@ -57,4 +57,11 @@ export const filterProducts = query => {
     payload: query
   };
 };
+export const filterCategory = query => {
+  return {
+    type: actionTypes.FILTER_CATEGORY,
+    payload: query
+  };
+};
+
 

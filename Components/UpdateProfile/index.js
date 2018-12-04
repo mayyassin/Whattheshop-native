@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import PhoneInput from "react-native-phone-input";
 
 import {
   loginUser,
