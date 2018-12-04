@@ -16,15 +16,24 @@ import {
 import bubbles from "../../assets/images/bubbles.png";
 import { ImageBackground, View, TouchableOpacity } from "react-native";
 // Actions
-import {
-  removeItemFromCart,
-  checkoutCart
-} from "../../store/actions/cartActions";
+
+import { removeItemFromCart, checkout } from "../../store/actions/cartActions";
 import styles from "./styles";
+
 
 class ProductCart extends Component {
   handleCheckout() {
-    this.props.checkoutCart();
+    if (this.props.user) {
+      const cart = {
+        cart: this.props.cart.cart,
+        address: this.props.cart.address
+      };
+      this.props.checkout(cart);
+      alert("You have successfully checked out");
+    } else {
+      alert("You have to login first to checkout");
+      this.props.navigation.navigate("Login");
+    }
   }
 
   handleRemove(item) {
@@ -32,22 +41,24 @@ class ProductCart extends Component {
   }
 
   componentDidMount() {
-    if (!this.props.user) {
-      this.props.navigation.replace("Login");
-    }
+    // if (!this.props.user) {
+    //   this.props.navigation.replace("Login");
+    // }
   }
 
-  renderItem(item, index) {
+  renderItem(oneProduct) {
     return (
-      <ListItem key={index}>
+      <ListItem key={oneProduct.item.id}>
         <Left>
-          <Text style={{ color: "white", marginLeft: 16 }}> {item.name} </Text>
+          <Text style={{ color: "black", marginLeft: 16 }}>
+            {oneProduct.item.name}
+          </Text>
           <Text note style={{ marginLeft: 16 }}>
-            {item.option}
+            {oneProduct.item.price + " KD"}
           </Text>
         </Left>
         <Body>
-          <Text style={{ color: "white" }}>{item.quantity}</Text>
+          <Text>{oneProduct.quantity}</Text>
         </Body>
         <Right>
           <Button transparent onPress={() => this.handleRemove(item)}>
@@ -59,11 +70,17 @@ class ProductCart extends Component {
   }
 
   render() {
-    const { list } = this.props.cart;
+    const list = this.props.cart.cart;
     return (
       <ImageBackground source={bubbles} style={styles.background}>
-        <List>{list.map((item, index) => this.renderItem(item, index))}</List>
-        <Footer
+      <List>
+        {list.map(product => this.renderItem(product))}
+        {this.props.cart.cart.length === 0 && (
+          <Text>No Items in your cart</Text>
+        )}
+      </List>
+{this.props.cart.cart.length !== 0 &&(
+<Footer
           style={{
             width: "100%",
             alignSelf: "center",
@@ -71,6 +88,7 @@ class ProductCart extends Component {
             backgroundColor: "transparent"
           }}
         >
+          
           <Button
             full
             style={{
@@ -78,10 +96,59 @@ class ProductCart extends Component {
             }}
             onPress={() => this.handleCheckout()}
           >
-            <Text style={{ fontWeight: "bold" }}>Checkout</Text>
+            <Text>Checkout</Text>
           </Button>
+        
+          
         </Footer>
+)}
       </ImageBackground>
+
+
+
+// <<<<<<< to_fix_product_list
+//       <List>
+//         {list.map(product => this.renderItem(product))}
+//         {this.props.cart.cart.length !== 0 ? (
+//           <Button
+//             full
+//             style={{
+//               backgroundColor: "#C34EBE"
+//             }}
+//             onPress={() => this.handleCheckout()}
+//           >
+//             <Text>Checkout</Text>
+//           </Button>
+//         ) : (
+//           <Text>No Items in your cart</Text>
+//         )}
+//       </List>
+// =======
+//       <ImageBackground source={bubbles} style={styles.background}>
+//         <List>{list.map((item, index) => this.renderItem(item, index))}</List>
+//         <Footer
+//           style={{
+//             width: "100%",
+//             alignSelf: "center",
+//             justifyContent: "center",
+//             backgroundColor: "transparent"
+//           }}
+//         >
+//           <Button
+//             full
+//             style={{
+//               backgroundColor: "#79E5BE"
+//             }}
+//             onPress={() => this.handleCheckout()}
+//           >
+//             <Text style={{ fontWeight: "bold" }}>Checkout</Text>
+//           </Button>
+//         </Footer>
+//       </ImageBackground>
+// >>>>>>> master
+
+
+
     );
   }
 }
@@ -93,7 +160,7 @@ const mapStateToProps = state => ({
 
 const mapActionsToProps = dispatch => ({
   removeItemFromCart: item => dispatch(removeItemFromCart(item)),
-  checkoutCart: () => dispatch(checkoutCart())
+  checkout: cart => dispatch(checkout(cart))
 });
 
 export default connect(
