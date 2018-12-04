@@ -275,6 +275,7 @@ const mapActionsToProps = dispatch => {
     check: navigation =>
       dispatch(actionCreators.checkForExpiredToken(navigation)),
     fetchAddresses: () => dispatch(actionCreators.fetchAddresses())
+
   };
 };
 

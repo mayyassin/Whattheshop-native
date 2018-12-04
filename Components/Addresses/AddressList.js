@@ -63,25 +63,40 @@ class AddressList extends Component {
       </Button>
     )
   });
-
-  renderItem(adress) {
+  handlePress(address) {
+    this.props.navigation.navigate("UpdateAddress", {
+      address_id: address
+    });
+  }
+  renderItem(address) {
     return (
-      <TouchableOpacity key={adress.id}>
+      <TouchableOpacity key={address.id}>
         <ImageBackground source={bubbles} style={styles.background}>
           <View style={styles.overlay} />
           <ListItem style={styles.transparent}>
             <Card style={styles.transparent}>
               <CardItem style={styles.transparent}>
                 <Text style={styles.text}>
+
                   {"Governorate: " + adress.governorate + "\n"}
                   {"Area: " + adress.area + "\n"}
                   {"Block: " + adress.block + "\n"}
                   {"Street: " + adress.street + "\n"}
                   {"Building or House: " + adress.building_or_house}
+
                 </Text>
               </CardItem>
             </Card>
           </ListItem>
+          <Button
+            full
+            style={{
+              backgroundColor: "#79E5BE"
+            }}
+            onPress={() => this.handlePress(address)}
+          >
+            <Text style={{ fontWeight: "bold" }}>Update</Text>
+          </Button>
         </ImageBackground>
       </TouchableOpacity>
     );
@@ -154,11 +169,4 @@ const mapStateToProps = state => ({
   addresses: state.address.addresses
 });
 
-const mapActionsToProps = dispatch => {
-  return {};
-};
-
-export default connect(
-  mapStateToProps,
-  mapActionsToProps
-)(AddressList);
+export default connect(mapStateToProps)(AddressList);

@@ -5,10 +5,13 @@ import { AsyncStorage } from "react-native";
 
 import * as actionTypes from "./types";
 
+const instance = axios.create({
+  baseURL: "http://192.168.100.32:8000/"
+});
 export const fetchProfile = () => {
   return dispatch => {
-    axios
-      .get(`http://192.168.100.37/api/profile/`)
+    instance
+      .get(`api/profile/`)
       .then(res => res.data)
       .then(user => {
         dispatch({
@@ -23,8 +26,8 @@ export const fetchProfile = () => {
 export const updateProfile = (profile, navigate, profile_id) => {
   console.log(profile);
   return dispatch => {
-    axios
-      .put(`http://192.168.100.37/api/profile/${profile_id}/update/`, profile)
+    instance
+      .put(`api/profile/${profile_id}/update/`, profile)
       .then(res => res.data)
       .then(user => {
         dispatch({

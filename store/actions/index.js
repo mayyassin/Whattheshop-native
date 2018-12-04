@@ -14,7 +14,7 @@ export {
   filterCategory
 } from "./productActions";
 
-export { fetchAddresses, createAddress } from "./AddressActions";
+export { fetchAddresses, createAddress, updateAddress } from "./AddressActions";
 
 export { fetchProfile, updateProfile } from "./profileActions";
 

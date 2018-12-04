@@ -7,7 +7,11 @@ const initialState = {
   loadingA: true,
   loadingB: true,
   filteredProducts: [],
-  filteredCategory: []
+
+  filteredCategory: [],
+  loadingA: true,
+  loadingB: true
+
 };
 
 export default function(state = initialState, action) {

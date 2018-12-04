@@ -4,7 +4,7 @@ import axios from "axios";
 import * as actionTypes from "./types";
 
 const instance = axios.create({
-  baseURL: "http://192.168.100.37/"
+  baseURL: "http://192.168.100.32:8000/"
 });
 // Get all coffeeShops
 export const getProducts = () => dispatch => {
