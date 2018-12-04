@@ -11,7 +11,6 @@ const initialState = {
 export default (state = initialState, action) => {
   switch (action.type) {
     case actionTypes.FETCH_PROFILE:
-      console.log(action.payload);
       return {
         ...state,
         profile: action.payload,

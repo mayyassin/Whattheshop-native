@@ -3,7 +3,7 @@ import * as actionTypes from "./types";
 import axios from "axios";
 
 const instance = axios.create({
-  baseURL: "http://192.168.100.32:8000/"
+  baseURL: "http://192.168.100.37/"
 });
 
 const setOrderLoading = () => ({

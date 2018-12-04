@@ -1,4 +1,3 @@
-
 // Coffee Types
 export const GET_PRODUCTS = "GET_PRODUCTS";
 export const PRODUCTS_LOADING = "PRODUCTS_LOADING";
@@ -15,7 +14,6 @@ export const CHECKOUT = "CHECKOUT";
 export const SET_CURRENT_USER = "SET_CURRENT_USER;";
 export const SET_ERROR = "SET_ERROR";
 export const LOGOUT_USER = "LOGOUT_USER";
-export const FILTER_PRODUCTS = "FILTER_PRODUCTS";
 export const FETCH_ORDERS = "FETCH_ORDERS";
 export const FETCH_ORDER = "FETCH_ORDER";
 export const FETCH_ADDRESSES = "FETCH_ADDRESSES";
@@ -25,10 +23,6 @@ export const SET_ADDRESS = "SET_ADDRESS";
 export const FILTER_PRODUCTS = "FILTER_PRODUCTS";
 export const FILTER_CATEGORY = "FILTER_CATEGORY";
 
-export const CREAT_ADDRESS = "CREAT_ADDRESS";
-export const FETCH_ADDRESSES = "FETCH_ADDRESSES";
-export const FETCH_ORDERS = "FETCH_ORDERS";
-export const FETCH_ORDER = "FETCH_ORDER";
 export const SET_ORDER_LOADING = "SET_ORDER_LOADING";
 export const SET_ORDERS_LOADING = "SET_ORDERS_LOADING";
 
@@ -55,4 +49,3 @@ export const SET_ORDERS_LOADING = "SET_ORDERS_LOADING";
 // export const FETCH_ORDER = "FETCH_ORDER";
 // export const SET_ORDER_LOADING = "SET_ORDER_LOADING";
 // export const SET_ORDERS_LOADING = "SET_ORDERS_LOADING";
-

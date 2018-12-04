@@ -21,8 +21,6 @@ const reducer = (state = initialState, action) => {
         cart = state.cart.concat(newProduct);
       }
 
-      // console.log(cartItem);
-
       return {
         ...state,
         cart,

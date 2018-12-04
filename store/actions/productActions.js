@@ -4,7 +4,7 @@ import axios from "axios";
 import * as actionTypes from "./types";
 
 const instance = axios.create({
-  baseURL: "http://192.168.100.32:8000/"
+  baseURL: "http://192.168.100.37/"
 });
 // Get all coffeeShops
 export const getProducts = () => dispatch => {
@@ -25,11 +25,9 @@ export const getProducts = () => dispatch => {
 
 export const fetchProduct = itemID => {
   return dispatch => {
-
     dispatch(setProductsLoading());
     instance
       .get(`api/product/${itemID}/detail/`)
-
       .then(res => res.data)
       .then(item => {
         dispatch({
@@ -45,7 +43,6 @@ export const fetchProduct = itemID => {
 export const setProductsLoading = () => ({
   type: actionTypes.PRODUCTS_LOADING
 });
-
 
 export const setProductLoading = () => ({
   type: actionTypes.PRODUCT_LOADING
@@ -63,5 +60,3 @@ export const filterCategory = query => {
     payload: query
   };
 };
-
-

@@ -162,7 +162,7 @@ class OrdersList extends Component {
 
 const mapStateToProps = state => ({
   product: state.product,
-  quantity: quantityCounter(state.cart.list),
+  quantity: quantityCounter(state.cart.cart),
   user: state.auth.user,
   loading: state.orders.loadingA,
   orders: state.orders.orders

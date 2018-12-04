@@ -233,7 +233,7 @@ class AddressForm extends Component {
               success
               onPress={() => this.submitHandler()}
             >
-              <Text style={{ fontWeight: "bold" }}>Login</Text>
+              <Text style={{ fontWeight: "bold" }}>Add</Text>
             </Button>
             <Text> </Text>
           </List>

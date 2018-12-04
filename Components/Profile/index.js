@@ -68,7 +68,6 @@ class Profile extends Component {
     )
   });
 
-
   componentDidMount() {
     if (!this.props.user) {
       this.props.navigation.replace("Login");
@@ -82,7 +81,7 @@ class Profile extends Component {
       this.props.navigation.setParams({ quantity: this.props.quantity });
     }
   }
-handlePress(product) {
+  handlePress(product) {
     this.props.navigation.navigate("UpdateProfile", {
       user: user
     });
@@ -173,7 +172,6 @@ const mapStateToProps = state => ({
   profile: state.auth.profile,
   isAuthenticated: state.auth.isAuthenticated,
   quantity: quantityCounter(state.cart.cart)
-r
 });
 
 const mapActionsToProps = dispatch => {

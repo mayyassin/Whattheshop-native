@@ -1,4 +1,9 @@
-export { login, logoutUser, signup, checkForExpiredToken } from "./authActions";
+export {
+  loginUser,
+  logoutUser,
+  registerUser,
+  checkForExpiredToken
+} from "./authActions";
 
 // export { setErrors } from "./errors";
 

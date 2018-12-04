@@ -1,10 +1,8 @@
 import React, { Component } from "react";
 import { ImageBackground, View, TouchableOpacity } from "react-native";
 import { connect } from "react-redux";
-import { getProducts, fetchProduct } from "../../store/actions/productActions";
-import * as actionTypes from "../../store/actions/authActions";
-import { logoutUser } from "../../store/actions/authActions";
-import { fetchProfile } from "../../store/actions/profileActions";
+import * as actionTypes from "../../store/actions";
+
 import bubbles from "../../assets/images/bubbles.png";
 
 import axios from "axios";
@@ -150,7 +148,7 @@ class AddressList extends Component {
 
 const mapStateToProps = state => ({
   product: state.product,
-  quantity: quantityCounter(state.cart.list),
+  quantity: quantityCounter(state.cart.cart),
   user: state.auth.user,
   loading: state.product.loading,
   addresses: state.address.addresses

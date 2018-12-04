@@ -9,7 +9,6 @@ const initialState = {
   filteredProducts: [],
   filteredCategory: [],
   loading: false
-
 };
 
 export default function(state = initialState, action) {
@@ -22,8 +21,7 @@ export default function(state = initialState, action) {
         filteredProducts: action.payload,
         loadingA: false
       };
-  
-      };
+
     // case actionTypes.GET_PRODUCT_BY_ID:
     //   return {
     //     ...state,
