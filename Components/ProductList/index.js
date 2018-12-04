@@ -270,9 +270,8 @@ const mapActionsToProps = dispatch => {
     fetchProfile: user => dispatch(actionCreators.fetchProfile(user)),
     onSearch: query => dispatch(actionCreators.filterProducts(query)),
     categoryChoice: query => dispatch(actionCreators.filterCategory(query)),
-    check: navigation => dispatch(actionCreators.checkForExpiredToken(navigation))
-
-
+    check: navigation =>
+      dispatch(actionCreators.checkForExpiredToken(navigation))
   };
 };
 

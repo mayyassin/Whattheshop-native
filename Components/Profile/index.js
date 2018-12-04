@@ -177,8 +177,7 @@ const mapStateToProps = state => ({
 const mapActionsToProps = dispatch => {
   return {
     fetchProfile: user => dispatch(actionTypes.fetchProfile(user)),
-    fetchAddresses: () => dispatch(actionTypes.fetchAddresses()),
-    updateProfile: profile => dispatch(actionTypes.updateProfile(user))
+    fetchAddresses: () => dispatch(actionTypes.fetchAddresses())
   };
 };
 
