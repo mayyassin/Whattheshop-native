@@ -9,8 +9,10 @@ const instance = axios.create({
 // Get all coffeeShops
 export const getProducts = () => dispatch => {
   dispatch(setProductsLoading());
+
   instance
     .get("api/product/list/")
+
     .then(res => res.data)
     .then(products => {
       dispatch({
@@ -18,14 +20,16 @@ export const getProducts = () => dispatch => {
         payload: products
       });
     })
-    .catch(err => console.log(err));
+    .catch(err => console.error(err));
 };
 
 export const fetchProduct = itemID => {
   return dispatch => {
+
     dispatch(setProductsLoading());
     instance
       .get(`api/product/${itemID}/detail/`)
+
       .then(res => res.data)
       .then(item => {
         dispatch({
@@ -42,6 +46,11 @@ export const setProductsLoading = () => ({
   type: actionTypes.PRODUCTS_LOADING
 });
 
+
+export const setProductLoading = () => ({
+  type: actionTypes.PRODUCT_LOADING
+});
+
 export const filterProducts = query => {
   return {
     type: actionTypes.FILTER_PRODUCTS,
@@ -54,3 +63,5 @@ export const filterCategory = query => {
     payload: query
   };
 };
+
+

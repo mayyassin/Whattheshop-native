@@ -24,6 +24,7 @@ import {
   Header,
   Container
 } from "native-base";
+import { quantityCounter } from "../../utilities/quantityCounter";
 
 class Login extends Component {
   constructor(props) {
@@ -46,7 +47,8 @@ class Login extends Component {
   }
 
   componentDidMount() {
-    this.props.check(this.props.navigation);
+    // this.props.check(this.props.navigation);
+    this.props.check();
   }
   render() {
     return (
@@ -141,7 +143,8 @@ const mapActionsToProps = dispatch => {
   return {
     login: (user, navigation) => dispatch(loginUser(user, navigation)),
     register: (user, navigation) => dispatch(registerUser(user, navigation)),
-    check: navigation => dispatch(checkForExpiredToken(navigation))
+    // check: navigation => dispatch(checkForExpiredToken(navigation))
+    check: () => dispatch(checkForExpiredToken())
   };
 };
 

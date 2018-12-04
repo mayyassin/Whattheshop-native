@@ -29,6 +29,7 @@ import {
 import { ImageBackground, View, TouchableOpacity } from "react-native";
 
 import styles from "./styles";
+import { quantityCounter } from "../../utilities/quantityCounter";
 
 class Profile extends Component {
   static navigationOptions = ({ navigation }) => ({
@@ -67,6 +68,25 @@ class Profile extends Component {
     )
   });
 
+
+  // componentDidMount() {
+  //   this.props.fetchProfile(this.props.user.user_id);
+  // }
+  componentDidMount() {
+    this.props.navigation.setParams({ quantity: this.props.quantity });
+    this.props.fetchAddresses();
+  }
+
+  componentDidUpdate(prevProps) {
+    if (prevProps.quantity != this.props.quantity) {
+      this.props.navigation.setParams({ quantity: this.props.quantity });
+    }
+  }
+handlePress(product) {
+    this.props.navigation.navigate("UpdateProfile", {
+      user: user
+    });
+  }
   render() {
     const profile = this.props.profile;
     return (
@@ -102,6 +122,24 @@ class Profile extends Component {
           >
             <Text style={{ fontWeight: "bold" }}>Add Address</Text>
           </Button>
+          <Button
+            full
+            style={{
+              backgroundColor: "#79E5BE"
+            }}
+            onPress={() => this.props.navigation.navigate("AddressList")}
+          >
+            <Text style={{ fontWeight: "bold" }}>Check Addresses</Text>
+          </Button>
+          <Button
+            full
+            style={{
+              backgroundColor: "#79E5BE"
+            }}
+            onPress={() => this.props.navigation.navigate("OrdersList")}
+          >
+            <Text style={{ fontWeight: "bold" }}>Check Order History</Text>
+          </Button>
         </Content>
         <Footer
           style={{
@@ -128,14 +166,18 @@ class Profile extends Component {
 
 const mapStateToProps = state => ({
   user: state.auth.user,
-  profile: state.profile.profile,
-  isAuthenticated: state.profile.isAuthenticated
+  profile: state.auth.profile,
+  isAuthenticated: state.auth.isAuthenticated,
+  quantity: quantityCounter(state.cart.cart)
+r
 });
 
 const mapActionsToProps = dispatch => {
   return {
+
+
     fetchProfile: user => dispatch(actionTypes.fetchProfile(user)),
-    fetchAddresses: user => dispatch(actionTypes.fetchAddresses()),
+     fetchAddresses: () => dispatch(actionTypes.fetchAddresses()),
     updateProfile: profile => dispatch(actionTypes.updateProfile(user))
   };
 };
