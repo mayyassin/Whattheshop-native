@@ -32,9 +32,17 @@ import styles from "./styles";
 import { quantityCounter } from "../../utilities/quantityCounter";
 
 class ProductList extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      categoryChoice: false
+    };
+    this.handleCategory = this.handleCategory.bind(this);
+  }
   state = {
     firstQuery: ""
   };
+
   static navigationOptions = ({ navigation }) => ({
     title: "Product List",
     headerLeft: (
@@ -95,6 +103,10 @@ class ProductList extends Component {
     });
   }
 
+  handleCategory(product) {
+    this.props.categoryChoice(product);
+  }
+
   renderItem(product) {
     return (
       <TouchableOpacity
@@ -144,10 +156,55 @@ class ProductList extends Component {
       return (
         <Container>
           <SearchBar
-            onChangeText={event => this.props.onSearch(event)}
+            onChangeText={event => this.props.onSearch({ ListItems })}
             placeholder="Type Here..."
           />
           <Content>
+            <Button
+              style={{
+                backgroundColor: "#79E5BE"
+              }}
+              onPress={event => this.props.categoryChoice("")}
+            >
+              <Text
+                style={{
+                  alignSelf: "center",
+                  justifyContent: "center"
+                }}
+              >
+                All
+              </Text>
+            </Button>
+            <Button
+              style={{
+                backgroundColor: "#79E5BE"
+              }}
+              onPress={event => this.props.categoryChoice("Food")}
+            >
+              <Text
+                style={{
+                  alignSelf: "center",
+                  justifyContent: "center"
+                }}
+              >
+                Food
+              </Text>
+            </Button>
+            <Button
+              style={{
+                backgroundColor: "#79E5BE"
+              }}
+              onPress={event => this.props.categoryChoice("Drinks")}
+            >
+              <Text
+                style={{
+                  alignSelf: "center",
+                  justifyContent: "center"
+                }}
+              >
+                Drinks
+              </Text>
+            </Button>
             <List>{ListItems}</List>
           </Content>
           <Footer
@@ -208,7 +265,8 @@ const mapActionsToProps = dispatch => {
     getProducts: () => dispatch(actionCreators.getProducts()),
     fetchProduct: itemID => dispatch(actionCreators.fetchProduct(itemID)),
     fetchProfile: user => dispatch(actionCreators.fetchProfile(user)),
-    onSearch: query => dispatch(actionCreators.filterProducts(query))
+    onSearch: query => dispatch(actionCreators.filterProducts(query)),
+    categoryChoice: query => dispatch(actionCreators.filterCategory(query))
   };
 };
 
