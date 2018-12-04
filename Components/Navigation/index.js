@@ -12,6 +12,7 @@ import UpdateProfile from "../UpdateProfile";
 
 import AddressForm from "../Addresses";
 import AddressList from "../Addresses/AddressList";
+import cartAddressChoice from "../Addresses/cartAddressChoice";
 import OrdersList from "../Orders/OrdersList";
 import OrderDetail from "../Orders/OrderDetail";
 
@@ -26,7 +27,8 @@ export default createStackNavigator(
     AddressForm: AddressForm,
     AddressList: AddressList,
     OrdersList: OrdersList,
-    OrderDetail: OrderDetail
+    OrderDetail: OrderDetail,
+    CartAddressChoice: cartAddressChoice
   },
   {
     initialRouteName: "ProductList",

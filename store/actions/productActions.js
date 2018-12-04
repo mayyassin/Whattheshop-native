@@ -25,7 +25,7 @@ export const getProducts = () => dispatch => {
 
 export const fetchProduct = itemID => {
   return dispatch => {
-    dispatch(setProductsLoading());
+    dispatch(setProductLoading());
     instance
       .get(`api/product/${itemID}/detail/`)
       .then(res => res.data)
