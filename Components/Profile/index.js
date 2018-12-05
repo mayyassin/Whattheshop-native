@@ -99,47 +99,51 @@ class Profile extends Component {
           <Content>
             <List>
               <ListItem style={styles.top}>
-                <Left>
-                  <Text style={styles.text}>
-                    Name: {profile.firstname + " " + profile.lastname + "\n"}
-                    Date of birth: {profile.dob + "\n"}
-                    Email: {profile.email + "\n"}
-                    Phone number: {profile.number + "\n"}
-                  </Text>
-                </Left>
+                <Text style={styles.text}>
+                  Name: {profile.firstname + " " + profile.lastname + "\n"}
+                  Date of birth: {profile.dob + "\n"}
+                  Email: {profile.email + "\n"}
+                  Phone number: {profile.number + "\n"}
+                </Text>
 
                 <Body />
-                <Right>
-                  <Thumbnail bordered source={{ uri: profile.profile_pic }} />
-                </Right>
+
+                <Thumbnail bordered source={{ uri: profile.profile_pic }} />
               </ListItem>
               <ListItem style={{ borderBottomWidth: 0 }}>
-                <Left />
                 <Body />
               </ListItem>
             </List>
             <Button
-              full
               style={{
-                backgroundColor: "#79E5BE"
+                alignSelf: "center",
+                justifyContent: "center",
+                width: 190,
+                backgroundColor: "#16DE9B"
               }}
               onPress={() => this.props.navigation.navigate("AddressForm")}
             >
               <Text style={{ fontWeight: "bold" }}>Add Address</Text>
             </Button>
+            <Text />
             <Button
-              full
               style={{
-                backgroundColor: "#79E5BE"
+                alignSelf: "center",
+                justifyContent: "center",
+                width: 190,
+                backgroundColor: "#16DE9B"
               }}
               onPress={() => this.props.navigation.navigate("AddressList")}
             >
               <Text style={{ fontWeight: "bold" }}>Check Addresses</Text>
             </Button>
+            <Text />
             <Button
-              full
               style={{
-                backgroundColor: "#79E5BE"
+                alignSelf: "center",
+                justifyContent: "center",
+                width: 190,
+                backgroundColor: "#16DE9B"
               }}
               onPress={() => this.props.navigation.navigate("OrdersList")}
             >
@@ -157,7 +161,7 @@ class Profile extends Component {
             <Button
               full
               style={{
-                backgroundColor: "#79E5BE"
+                backgroundColor: "#16DE9B"
               }}
               onPress={() => this.props.navigation.navigate("UpdateProfile")}
             >

@@ -4,8 +4,8 @@ import bubbles from "../../assets/images/bubbles.png";
 const styles = StyleSheet.create({
   text: {
     fontWeight: "bold",
-    color: "black",
-    fontSize: 15,
+    color: "#16DE9B",
+    fontSize: 20,
     flex: 5,
     flexWrap: "wrap",
     justifyContent: "center",
@@ -37,7 +37,8 @@ const styles = StyleSheet.create({
     flex: 1
   },
   transparent: {
-    flexDirection: "row"
+    flexDirection: "row",
+    backgroundColor: "transparent"
   }
 });
 

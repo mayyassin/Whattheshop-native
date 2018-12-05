@@ -22,7 +22,8 @@ import {
   Footer,
   Container,
   Body,
-  Image
+  Image,
+  Row
 } from "native-base";
 
 // Style
@@ -159,55 +160,66 @@ class ProductList extends Component {
       return (
         <Container>
           <SearchBar
-            onChangeText={event => this.props.onSearch({ ListItems })}
+            onChangeText={event => this.props.onSearch(event)}
             placeholder="Type Here..."
           />
           <Content>
-            <Button
-              style={{
-                backgroundColor: "#79E5BE"
-              }}
-              onPress={event => this.props.categoryChoice("")}
-            >
-              <Text
+            <Row>
+              <Button
                 style={{
+                  backgroundColor: "#8E44AD",
+                  flex: 2,
                   alignSelf: "center",
                   justifyContent: "center"
                 }}
+                onPress={event => this.props.categoryChoice("")}
               >
-                All
-              </Text>
-            </Button>
-            <Button
-              style={{
-                backgroundColor: "#79E5BE"
-              }}
-              onPress={event => this.props.categoryChoice("Food")}
-            >
-              <Text
+                <Text
+                  style={{
+                    alignSelf: "center",
+                    justifyContent: "center"
+                  }}
+                >
+                  All
+                </Text>
+              </Button>
+              <Button
                 style={{
+                  backgroundColor: "#8E44AD",
+                  flex: 2,
                   alignSelf: "center",
                   justifyContent: "center"
                 }}
+                onPress={event => this.props.categoryChoice("mobiles")}
               >
-                Food
-              </Text>
-            </Button>
-            <Button
-              style={{
-                backgroundColor: "#79E5BE"
-              }}
-              onPress={event => this.props.categoryChoice("Drinks")}
-            >
-              <Text
+                <Text
+                  style={{
+                    alignSelf: "center",
+                    justifyContent: "center"
+                  }}
+                >
+                  Mobiles
+                </Text>
+              </Button>
+              <Button
                 style={{
+                  backgroundColor: "#8E44AD",
+                  flex: 2,
                   alignSelf: "center",
                   justifyContent: "center"
                 }}
+                onPress={event => this.props.categoryChoice("tablets")}
               >
-                Drinks
-              </Text>
-            </Button>
+                <Text
+                  style={{
+                    alignSelf: "center",
+                    justifyContent: "center"
+                  }}
+                >
+                  Tablets
+                </Text>
+              </Button>
+            </Row>
             <List>{ListItems}</List>
           </Content>
           <Footer
@@ -218,7 +230,9 @@ class ProductList extends Component {
           >
             <Button
               style={{
-                backgroundColor: "#79E5BE"
+                backgroundColor: "#16DE9B",
+                alignSelf: "center",
+                justifyContent: "center"
               }}
               onPress={
                 this.props.user
@@ -273,6 +287,7 @@ const mapActionsToProps = dispatch => {
     onSearch: query => dispatch(actionCreators.filterProducts(query)),
     categoryChoice: query => dispatch(actionCreators.filterCategory(query)),
     check: navigation =>
+
       dispatch(actionCreators.checkForExpiredToken(navigation)),
     fetchAddresses: () => dispatch(actionCreators.fetchAddresses())
 

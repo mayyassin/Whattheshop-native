@@ -115,6 +115,7 @@ class ProductDetail extends Component {
                   <Thumbnail bordered source={{ uri: this.props.item.img }} />
                 </Right>
               </ListItem>
+
               {this.props.item.quantity && (
                 <View>
                   <ListItem style={{ borderBottomWidth: 0 }}>
@@ -131,7 +132,7 @@ class ProductDetail extends Component {
                   <Button
                     full
                     style={{
-                      backgroundColor: "#79E5BE"
+                      backgroundColor: "#16DE9B"
                     }}
                     onPress={() => this.handleAdd()}
                   >
@@ -139,6 +140,7 @@ class ProductDetail extends Component {
                   </Button>
                 </View>
               )}
+
             </List>
           </ImageBackground>
         </Content>

@@ -2,7 +2,7 @@ import { StyleSheet } from "react-native";
 
 const styles = StyleSheet.create({
   text: {
-    color: "#5B2C6F",
+    color: "#8E44AD",
     fontSize: 15,
     fontWeight: "bold",
     marginLeft: 16,

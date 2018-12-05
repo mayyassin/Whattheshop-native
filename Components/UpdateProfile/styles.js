@@ -3,7 +3,7 @@ import bubbles from "../../assets/images/bubbles.png";
 
 const styles = StyleSheet.create({
   text: {
-    color: "#5B2C6F",
+    color: "#8E44AD",
     fontSize: 15,
     fontWeight: "bold",
     marginLeft: 16,

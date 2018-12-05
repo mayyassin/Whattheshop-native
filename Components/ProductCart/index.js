@@ -135,6 +135,7 @@ class ProductCart extends Component {
       <ImageBackground source={bubbles} style={styles.background}>
         <List>
           {list.map(product => this.renderItem(product))}
+
           {this.props.cart.cart.length !== 0 && (
             <View>
               <Text>Total: {total(list)}KD</Text>
@@ -171,6 +172,7 @@ class ProductCart extends Component {
           <Text>Continue Shopping</Text>
         </Button>
 
+
         {this.props.cart.cart.length !== 0 && (
           <Footer
             style={{
@@ -183,12 +185,14 @@ class ProductCart extends Component {
             <Button
               full
               style={{
-                backgroundColor: "#79E5BE"
+                backgroundColor: "#16DE9B"
+
               }}
               onPress={() => this.handleCheckout()}
             >
               <Text>Checkout</Text>
             </Button>
+
             {this.props.user && (
               <Button
                 full
@@ -204,6 +208,7 @@ class ProductCart extends Component {
                 )}
               </Button>
             )}
+
           </Footer>
         )}
       </ImageBackground>
