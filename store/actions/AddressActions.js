@@ -3,7 +3,7 @@ import * as actionTypes from "./types";
 import axios from "axios";
 
 const instance = axios.create({
-  baseURL: "http://192.168.100.37/"
+  baseURL: "http://192.168.100.32:8000/"
 });
 
 export const setLoading = () => ({
@@ -40,5 +40,22 @@ export const fetchAddresses = () => {
         });
       })
       .catch(err => console.log(err));
+  };
+};
+
+export const updateAddress = (addressInfo, navigate, address_id) => {
+  console.log(address_id);
+  return dispatch => {
+    instance
+      .put(`api/address/${address_id}/update/`, addressInfo)
+      .then(res => res.data)
+      .then(addressInfo => {
+        dispatch({
+          type: actionTypes.UPDATE_ADDRESS,
+          payload: addressInfo
+        });
+        navigate.replace("Profile");
+      })
+      .catch(err => console.error(err.response));
   };
 };

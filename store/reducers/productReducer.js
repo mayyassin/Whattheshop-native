@@ -7,8 +7,11 @@ const initialState = {
   loadingA: true,
   loadingB: true,
   filteredProducts: [],
+
   filteredCategory: [],
-  loading: false
+  loadingA: true,
+  loadingB: true
+
 };
 
 export default function(state = initialState, action) {
@@ -60,8 +63,7 @@ export default function(state = initialState, action) {
           return `${product.category}`
             .toLowerCase()
             .includes(action.payload.toLowerCase());
-        }),
-        loading: false
+        })
       };
     default:
       return state;

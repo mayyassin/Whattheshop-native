@@ -1,15 +1,8 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 
-import {
-  loginUser,
-  registerUser,
-  checkForExpiredToken
-} from "../../store/actions/authActions";
-import {
-  fetchProfile,
-  updateProfile
-} from "../../store/actions/profileActions";
+import * as actionTypes from "../../store/actions/";
+
 import bubbles from "../../assets/images/bubbles.png";
 import DatePicker from "react-native-datepicker";
 // NativeBase Components
@@ -38,34 +31,23 @@ import { ImageBackground, View, TouchableOpacity } from "react-native";
 
 import styles from "./styles";
 
-class UpdateProfile extends Component {
+class UpdateAddress extends Component {
   constructor(props) {
     super(props);
     this.state = {};
     this.submitHandler = this.submitHandler.bind(this);
   }
   static navigationOptions = {
-    title: "Update Profile"
+    title: "Update Address"
   };
 
   submitHandler(e) {
-    this.props.updateProfile(
-      this.state,
-      this.props.navigation,
-      this.props.user.user_id
-    );
+    const address_id = this.props.navigation.getParam("address_id", {});
+    alert(address_id.id);
+    this.props.updateAddress(this.state, this.props.navigation, address_id.id);
   }
 
-  onPressFlag() {
-    this.countryPicker.openModal();
-  }
-
-  selectCountry(country) {
-    this.phone.selectCountry(country.cca2.toLowerCase());
-    this.setState({ cca2: country.cca2 });
-  }
   render() {
-    const profile = this.props.profile;
     return (
       <Content style={{ backgroundColor: "rgba(0,0,0,0.05)" }}>
         <Header transparent />
@@ -78,7 +60,43 @@ class UpdateProfile extends Component {
                     <Text> </Text>
                     <Text> </Text>
                     <Label style={{ fontWeight: "bold", color: "#F32BBD" }}>
-                      First Name
+                      Governorate
+                    </Label>
+                  </Body>
+                  <Item
+                    rounded
+                    style={{
+                      backgroundColor: "white",
+                      marginTop: 10,
+                      marginBottom: 10
+                    }}
+                  >
+                    <Picker
+                      mode="dropdown"
+                      iosHeader="Select one"
+                      placeHolder="Select a governorate"
+                      selectedValue={this.state.governorate}
+                      style={{ height: 50, width: 100 }}
+                      onValueChange={(itemValue, itemIndex) =>
+                        this.setState({ governorate: itemValue })
+                      }
+                      style={{ width: "100%" }}
+                    >
+                      <Picker.Item label="Al-Asimah" value="Al Asimah" />
+                      <Picker.Item label="Hawalli" value="Hawalli" />
+                      <Picker.Item
+                        label="Mubarak Al-Kabeer"
+                        value="Mubarak Al-Kabeer"
+                      />
+                      <Picker.Item label="Al-Ahmadi" value="Al-Ahmadi" />
+                      <Picker.Item label="Farwaniya" value="Farwaniya" />
+                      <Picker.Item label="Al-Jahra" value="Al-Jahra" />
+                    </Picker>
+                  </Item>
+
+                  <Body>
+                    <Label style={{ fontWeight: "bold", color: "#F32BBD" }}>
+                      Area
                     </Label>
                   </Body>
                   <Item
@@ -86,37 +104,89 @@ class UpdateProfile extends Component {
                     style={{ backgroundColor: "white", marginTop: 10 }}
                   >
                     <Input
-                      name="firstname"
+                      name="area"
                       type="text"
                       autoCorrect={false}
                       autoCapitalize="none"
+                      onChangeText={value => this.setState({ area: value })}
+                    />
+                  </Item>
+                  <Body>
+                    <Text> </Text>
+                    <Text> </Text>
+                    <Label style={{ fontWeight: "bold", color: "#F32BBD" }}>
+                      Block
+                    </Label>
+                  </Body>
+                  <Item
+                    rounded
+                    style={{
+                      backgroundColor: "white",
+                      marginTop: 10,
+                      marginBottom: 10
+                    }}
+                  >
+                    <Input
+                      type="number"
+                      name="block"
+                      autoCorrect={false}
+                      autoCapitalize="none"
+                      onChangeText={value => this.setState({ block: value })}
+                    />
+                  </Item>
+                  <Body>
+                    <Text> </Text>
+                    <Text> </Text>
+                    <Label style={{ fontWeight: "bold", color: "#F32BBD" }}>
+                      Street
+                    </Label>
+                  </Body>
+                  <Item
+                    rounded
+                    style={{
+                      backgroundColor: "white",
+                      marginTop: 10,
+                      marginBottom: 10
+                    }}
+                  >
+                    <Input
+                      type="text"
+                      name="street"
+                      autoCorrect={false}
+                      autoCapitalize="none"
+                      onChangeText={value => this.setState({ street: value })}
+                    />
+                  </Item>
+                  <Body>
+                    <Text> </Text>
+                    <Text> </Text>
+                    <Label style={{ fontWeight: "bold", color: "#F32BBD" }}>
+                      Building or House
+                    </Label>
+                  </Body>
+                  <Item
+                    rounded
+                    style={{
+                      backgroundColor: "white",
+                      marginTop: 10,
+                      marginBottom: 10
+                    }}
+                  >
+                    <Input
+                      type="number"
+                      name="building_or_house"
+                      autoCorrect={false}
+                      autoCapitalize="none"
                       onChangeText={value =>
-                        this.setState({ firstname: value })
+                        this.setState({ building_or_house: value })
                       }
                     />
                   </Item>
                   <Body>
-                    <Label style={{ fontWeight: "bold", color: "#F32BBD" }}>
-                      Last Name
-                    </Label>
-                  </Body>
-                  <Item
-                    rounded
-                    style={{ backgroundColor: "white", marginTop: 10 }}
-                  >
-                    <Input
-                      name="lastname"
-                      type="text"
-                      autoCorrect={false}
-                      autoCapitalize="none"
-                      onChangeText={value => this.setState({ lastname: value })}
-                    />
-                  </Item>
-                  <Body>
                     <Text> </Text>
                     <Text> </Text>
                     <Label style={{ fontWeight: "bold", color: "#F32BBD" }}>
-                      Date of birth
+                      Floor
                     </Label>
                   </Body>
                   <Item
@@ -127,43 +197,19 @@ class UpdateProfile extends Component {
                       marginBottom: 10
                     }}
                   >
-                    <DatePicker
-                      rounded
-                      style={{
-                        width: 320,
-                        marginTop: 10,
-                        marginBottom: 10
-                      }}
-                      date={this.state.dob}
-                      mode="date"
-                      placeholder="select date"
-                      format="YYYY-MM-DD"
-                      minDate="1900-01-01"
-                      maxDate="2018-12-01"
-                      confirmBtnText="Confirm"
-                      cancelBtnText="Cancel"
-                      customStyles={{
-                        dateIcon: {
-                          position: "absolute",
-                          left: 0,
-                          top: 4,
-                          marginLeft: 0
-                        },
-                        dateInput: {
-                          marginLeft: 36
-                        }
-                        // ... You can check the source to find the other keys.
-                      }}
-                      onDateChange={date => {
-                        this.setState({ dob: date });
-                      }}
+                    <Input
+                      type="number"
+                      name="floor"
+                      autoCorrect={false}
+                      autoCapitalize="none"
+                      onChangeText={value => this.setState({ floor: value })}
                     />
                   </Item>
                   <Body>
                     <Text> </Text>
                     <Text> </Text>
                     <Label style={{ fontWeight: "bold", color: "#F32BBD" }}>
-                      Email
+                      Extra Directions
                     </Label>
                   </Body>
                   <Item
@@ -176,44 +222,14 @@ class UpdateProfile extends Component {
                   >
                     <Input
                       type="text"
-                      name="email"
+                      name="extra_directions"
                       autoCorrect={false}
                       autoCapitalize="none"
-                      onChangeText={value => this.setState({ email: value })}
+                      onChangeText={value =>
+                        this.setState({ extra_directions: value })
+                      }
                     />
                   </Item>
-                  <Body>
-                    <Text> </Text>
-                    <Text> </Text>
-                    <Label style={{ fontWeight: "bold", color: "#F32BBD" }}>
-                      Phone Number
-                    </Label>
-                  </Body>
-                  <Item
-                    rounded
-                    style={{
-                      backgroundColor: "white",
-                      marginTop: 10,
-                      marginBottom: 10
-                    }}
-                  >
-                    <Input
-                      type="text"
-                      name="number"
-                      autoCorrect={false}
-                      autoCapitalize="none"
-                      onChangeText={value => this.setState({ number: value })}
-                    />
-                  </Item>
-
-                  <Item
-                    rounded
-                    style={{
-                      backgroundColor: "white",
-                      marginTop: 10,
-                      marginBottom: 10
-                    }}
-                  />
                 </Form>
               </Body>
             </ListItem>
@@ -222,12 +238,12 @@ class UpdateProfile extends Component {
                 alignSelf: "center",
                 justifyContent: "center",
                 width: 120,
-                backgroundColor: "#16DE9B"
+                backgroundColor: "#79E5BE"
               }}
               success
               onPress={() => this.submitHandler()}
             >
-              <Text style={{ fontWeight: "bold" }}>Update</Text>
+              <Text style={{ fontWeight: "bold" }}>Add</Text>
             </Button>
             <Text> </Text>
           </List>
@@ -242,18 +258,17 @@ class UpdateProfile extends Component {
 
 const mapStateToProps = state => ({
   user: state.auth.user,
-  profile: state.profile.profile,
   isAuthenticated: state.profile.isAuthenticated
 });
 
 const mapActionsToProps = dispatch => {
   return {
-    updateProfile: (profile, navigation, profile_id) =>
-      dispatch(updateProfile(profile, navigation, profile_id))
+    updateAddress: (addressInfo, navigation, address_id) =>
+      dispatch(actionTypes.updateAddress(addressInfo, navigation, address_id))
   };
 };
 
 export default connect(
   mapStateToProps,
   mapActionsToProps
-)(UpdateProfile);
+)(UpdateAddress);

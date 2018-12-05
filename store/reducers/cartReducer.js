@@ -3,7 +3,7 @@ import * as actionTypes from "../actions/types";
 const initialState = {
   loading: true,
   cart: [],
-  address: 1
+  address: 0
 };
 
 const reducer = (state = initialState, action) => {
@@ -35,7 +35,7 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         cart: [],
-        address: 1
+        address: 0
       };
     case actionTypes.SET_PRODUCT_LOADING:
       return {
@@ -46,6 +46,12 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         address: action.payload
+      };
+    case actionTypes.CHANGE_QUANTITY:
+      item = state.cart.find(item => item.id === action.payload.itemId);
+      item.quantity = action.payload.quantity;
+      return {
+        ...state
       };
     default:
       return state;

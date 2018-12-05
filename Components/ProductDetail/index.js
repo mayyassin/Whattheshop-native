@@ -32,7 +32,7 @@ class ProductDetail extends Component {
     this.state = {
       quantity: 1
     };
-    this.handleChange = this.handleChange.bind(this);
+    // this.handleChange = this.handleChange.bind(this);
     this.handleAdd = this.handleAdd.bind(this);
   }
 
@@ -48,9 +48,6 @@ class ProductDetail extends Component {
         cartQuantity: this.props.cartQuantity
       });
     }
-  }
-  handleChange(number) {
-    this.setState({ quantity: number });
   }
 
   handleAdd() {
@@ -119,24 +116,31 @@ class ProductDetail extends Component {
                 </Right>
               </ListItem>
 
-              <ListItem style={{ borderBottomWidth: 0 }}>
-                <Body>
-                  <NumericInput
-                    value={this.state.quantity}
-                    onChange={this.handleChange}
-                    type="up-down"
-                  />
-                </Body>
-              </ListItem>
-              <Button
-                full
-                style={{
-                  backgroundColor: "#16DE9B"
-                }}
-                onPress={() => this.handleAdd()}
-              >
-                <Text>Add to cart</Text>
-              </Button>
+              {this.props.item.quantity && (
+                <View>
+                  <ListItem style={{ borderBottomWidth: 0 }}>
+                    <Body>
+                      <NumericInput
+                        initValue={this.state.quantity}
+                        minValue={1}
+                        maxValue={this.props.item.quantity}
+                        type="up-down"
+                        onChange={value => this.setState({ quantity: value })}
+                      />
+                    </Body>
+                  </ListItem>
+                  <Button
+                    full
+                    style={{
+                      backgroundColor: "#16DE9B"
+                    }}
+                    onPress={() => this.handleAdd()}
+                  >
+                    <Text>Add to cart</Text>
+                  </Button>
+                </View>
+              )}
+
             </List>
           </ImageBackground>
         </Content>

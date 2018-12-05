@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { ImageBackground, View, TouchableOpacity } from "react-native";
 import { connect } from "react-redux";
-import * as actionTypes from "../../store/actions";
+import { setAddress } from "../../store/actions/cartActions";
 
 import bubbles from "../../assets/images/bubbles.png";
 
@@ -31,9 +31,9 @@ import styles from "./styles";
 // Actions
 import { quantityCounter } from "../../utilities/quantityCounter";
 
-class AddressList extends Component {
+class cartAddressChoice extends Component {
   static navigationOptions = ({ navigation }) => ({
-    title: "Address List",
+    title: "Choose Address",
     headerLeft: (
       <Button light transparent onPress={() => navigation.navigate("Profile")}>
         <Text>
@@ -63,37 +63,47 @@ class AddressList extends Component {
       </Button>
     )
   });
-  handlePress(address) {
-    this.props.navigation.navigate("UpdateAddress", {
-      address_id: address
-    });
-  }
-  renderItem(address) {
-    return (
 
-      <TouchableOpacity
-        key={adress.id}
-        style={{ backgroundColor: "black", padding: 15 }}
-      >
-        <Content>
-          <ImageBackground source={bubbles} style={styles.background}>
-            <View style={styles.overlay} />
-            <ListItem style={styles.transparent}>
-              <Card style={styles.transparent}>
-                <CardItem style={styles.transparent}>
-                  <Text style={styles.text}>
-                    Governorate: {adress.governorate + "\n"}
-                    Area: {adress.area + "\n"}
-                    Block: {adress.block + "\n"}
-                    Street: {adress.street + "\n"}
-                    Building/House: {adress.building_or_house + "\n"}
-                    Floor: {adress.street + "\n"}
-                  </Text>
-                </CardItem>
-              </Card>
-            </ListItem>
-          </ImageBackground>
-        </Content>
+  async setAddress(id) {
+    await this.props.setAddress(id);
+    this.props.navigation.navigate("ProductCart");
+  }
+
+  renderItem(adress) {
+    return (
+      <TouchableOpacity key={adress.id}>
+        <ImageBackground source={bubbles} style={styles.background}>
+          <View style={styles.overlay} />
+          <ListItem style={styles.transparent}>
+            <Card style={styles.transparent}>
+              <CardItem style={styles.transparent}>
+                <Text style={styles.text}>
+                  {"Governorate: " + adress.governorate + "\n"}
+                  {"Area: " + adress.area + "\n"}
+                  {"Block: " + adress.block + "\n"}
+                  {"Street: " + adress.street + "\n"}
+                  {"Building or House: " + adress.building_or_house}
+                </Text>
+                <Button
+                  style={{
+                    backgroundColor: "#79E5BE"
+                  }}
+                  onPress={() => this.setAddress(adress.id)}
+                >
+                  {/* <Icon
+                style={{
+                  alignSelf: "center",
+                  justifyContent: "center"
+                }}
+                type="MaterialCommunityIcons"
+                name={this.props.user ? "logout" : "login"}
+              /> */}
+                  <Text>Choose</Text>
+                </Button>
+              </CardItem>
+            </Card>
+          </ListItem>
+        </ImageBackground>
       </TouchableOpacity>
     );
   }
@@ -121,34 +131,18 @@ class AddressList extends Component {
           >
             <Button
               style={{
-                backgroundColor: "#16DE9B"
+                backgroundColor: "#79E5BE"
               }}
-              onPress={
-                this.props.user
-                  ? () => this.props.logout()
-                  : () => this.props.navigation.navigate("Login")
-              }
+              onPress={() => this.props.navigation.navigate("AddressForm")}
             >
-              {this.props.user ? (
-                <Text>{this.props.user.username.toUpperCase()}</Text>
-              ) : (
-                <Text
-                  style={{
-                    alignSelf: "center",
-                    justifyContent: "center"
-                  }}
-                >
-                  Login
-                </Text>
-              )}
-              <Icon
+              <Text
                 style={{
                   alignSelf: "center",
                   justifyContent: "center"
                 }}
-                type="MaterialCommunityIcons"
-                name={this.props.user ? "logout" : "login"}
-              />
+              >
+                New Address
+              </Text>
             </Button>
           </Footer>
         </Container>
@@ -165,4 +159,13 @@ const mapStateToProps = state => ({
   addresses: state.address.addresses
 });
 
-export default connect(mapStateToProps)(AddressList);
+const mapActionsToProps = dispatch => {
+  return {
+    setAddress: id => dispatch(setAddress(id))
+  };
+};
+
+export default connect(
+  mapStateToProps,
+  mapActionsToProps
+)(cartAddressChoice);

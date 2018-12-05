@@ -80,6 +80,9 @@ class Profile extends Component {
     if (prevProps.quantity != this.props.quantity) {
       this.props.navigation.setParams({ quantity: this.props.quantity });
     }
+    if (prevProps.user != this.props.user) {
+      this.props.fetchAddresses();
+    }
   }
   handlePress(product) {
     this.props.navigation.navigate("UpdateProfile", {
@@ -181,8 +184,7 @@ const mapStateToProps = state => ({
 const mapActionsToProps = dispatch => {
   return {
     fetchProfile: user => dispatch(actionTypes.fetchProfile(user)),
-    fetchAddresses: () => dispatch(actionTypes.fetchAddresses()),
-    updateProfile: profile => dispatch(actionTypes.updateProfile(user))
+    fetchAddresses: () => dispatch(actionTypes.fetchAddresses())
   };
 };
 

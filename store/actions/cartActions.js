@@ -3,7 +3,7 @@ import * as actionTypes from "./types";
 import axios from "axios";
 
 const instance = axios.create({
-  baseURL: "http://192.168.100.37/"
+  baseURL: "http://192.168.100.32:8000/"
   // baseURL: "http://127.0.0.1:8000/"
 });
 
@@ -30,6 +30,13 @@ export const addProduct = product => {
   return {
     type: actionTypes.ADD_PRODUCT,
     payload: product
+  };
+};
+
+export const changeQuantity = (itemId, quantity) => {
+  return {
+    type: actionTypes.CHANGE_QUANTITY,
+    payload: { itemId: itemId, quantity: quantity }
   };
 };
 
