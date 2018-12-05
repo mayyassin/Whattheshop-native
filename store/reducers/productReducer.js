@@ -47,7 +47,9 @@ export default function(state = initialState, action) {
       return {
         ...state,
         filteredProducts: state.productLists.filter(product => {
-          return `${product.name}`.toLowerCase().includes(action.payload);
+          return `${product.name}`
+            .toLowerCase()
+            .includes(action.payload.toLowerCase());
         }),
         loading: false
       };

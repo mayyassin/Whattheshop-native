@@ -82,7 +82,6 @@ class ProductDetail extends Component {
     )
   });
 
-
   // changeDrink(value) {
   //   this.setState({
   //     name: value
@@ -132,7 +131,7 @@ class ProductDetail extends Component {
               <Button
                 full
                 style={{
-                  backgroundColor: "#79E5BE"
+                  backgroundColor: "#16DE9B"
                 }}
                 onPress={() => this.handleAdd()}
               >
@@ -143,7 +142,6 @@ class ProductDetail extends Component {
         </Content>
       );
     }
-
   }
 }
 const mapStateToProps = state => ({

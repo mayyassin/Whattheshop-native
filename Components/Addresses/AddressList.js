@@ -66,23 +66,29 @@ class AddressList extends Component {
 
   renderItem(adress) {
     return (
-      <TouchableOpacity key={adress.id}>
-        <ImageBackground source={bubbles} style={styles.background}>
-          <View style={styles.overlay} />
-          <ListItem style={styles.transparent}>
-            <Card style={styles.transparent}>
-              <CardItem style={styles.transparent}>
-                <Text style={styles.text}>
-                  Governorate: {adress.governorate}
-                  {adress.area}
-                  {adress.block}
-                  {adress.street}
-                  {adress.area}
-                </Text>
-              </CardItem>
-            </Card>
-          </ListItem>
-        </ImageBackground>
+      <TouchableOpacity
+        key={adress.id}
+        style={{ backgroundColor: "black", padding: 15 }}
+      >
+        <Content>
+          <ImageBackground source={bubbles} style={styles.background}>
+            <View style={styles.overlay} />
+            <ListItem style={styles.transparent}>
+              <Card style={styles.transparent}>
+                <CardItem style={styles.transparent}>
+                  <Text style={styles.text}>
+                    Governorate: {adress.governorate + "\n"}
+                    Area: {adress.area + "\n"}
+                    Block: {adress.block + "\n"}
+                    Street: {adress.street + "\n"}
+                    Building/House: {adress.building_or_house + "\n"}
+                    Floor: {adress.street + "\n"}
+                  </Text>
+                </CardItem>
+              </Card>
+            </ListItem>
+          </ImageBackground>
+        </Content>
       </TouchableOpacity>
     );
   }
@@ -110,7 +116,7 @@ class AddressList extends Component {
           >
             <Button
               style={{
-                backgroundColor: "#79E5BE"
+                backgroundColor: "#16DE9B"
               }}
               onPress={
                 this.props.user

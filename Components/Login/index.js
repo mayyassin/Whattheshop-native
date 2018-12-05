@@ -105,7 +105,7 @@ class Login extends Component {
                 alignSelf: "center",
                 justifyContent: "center",
                 width: 120,
-                backgroundColor: "#79E5BE"
+                backgroundColor: "#16DE9B"
               }}
               success
               onPress={() => this.login()}
@@ -118,7 +118,7 @@ class Login extends Component {
                 alignSelf: "center",
                 justifyContent: "center",
                 width: 120,
-                backgroundColor: "#79E5BE"
+                backgroundColor: "#16DE9B"
               }}
               warning
               onPress={() => this.register()}
