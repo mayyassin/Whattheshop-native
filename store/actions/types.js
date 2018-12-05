@@ -26,7 +26,7 @@ export const FILTER_CATEGORY = "FILTER_CATEGORY";
 export const SET_ORDER_LOADING = "SET_ORDER_LOADING";
 export const SET_ORDERS_LOADING = "SET_ORDERS_LOADING";
 export const UPDATE_ADDRESS = "UPDATE_ADDRESS";
-
+export const CHANGE_QUANTITY = "CHANGE_QUANTITY";
 // // Auth actions
 // export const FETCH_PROFILE = "FETCH_PROFILE";
 // export const UPDATE_PROFILE = "UPDATE_PROFILE";
