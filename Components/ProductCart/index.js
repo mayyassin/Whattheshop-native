@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-
+import NumericInput from "react-native-numeric-input";
 // NativeBase Components
 import {
   Text,
@@ -19,7 +19,11 @@ import bubbles from "../../assets/images/bubbles.png";
 import { ImageBackground, View, TouchableOpacity } from "react-native";
 // Actions
 
-import { removeItemFromCart, checkout } from "../../store/actions/cartActions";
+import {
+  removeItemFromCart,
+  checkout,
+  changeQuantity
+} from "../../store/actions/cartActions";
 import styles from "./styles";
 
 class ProductCart extends Component {
@@ -38,6 +42,11 @@ class ProductCart extends Component {
   // componentDidMount(prevProps) {
   //   this.setState({ address: this.props.address });
   // }
+
+  changeHandler(itemId, value) {
+    this.props.changeQuantity(itemId, value);
+  }
+
   handleCheckout() {
     if (this.props.user && this.props.address) {
       const cart = {
@@ -78,16 +87,32 @@ class ProductCart extends Component {
           <Text style={{ color: "black", marginLeft: 16 }}>
             {oneProduct.item.name}
           </Text>
-          <Text note style={{ marginLeft: 16 }}>
-            {oneProduct.item.price + " KD"}
-          </Text>
         </Left>
-        <Body>
-          <Text>{oneProduct.quantity}</Text>
-        </Body>
+
+        <View>
+          <Text note style={{ marginLeft: 16 }}>
+            {oneProduct.item.price + " KD "}
+          </Text>
+        </View>
+        <View>
+          <NumericInput
+            initValue={oneProduct.quantity}
+            minValue={1}
+            maxValue={oneProduct.item.quantity}
+            type="up-down"
+            onChange={value => this.changeHandler(oneProduct.item.id, value)}
+          />
+        </View>
+
         <Right>
           <Button transparent onPress={() => this.handleRemove(oneProduct)}>
-            <Icon name="trash" style={{ color: "pink", fontSize: 21 }} />
+            <Text>
+              <Icon
+                type="FontAwesome"
+                name="trash"
+                style={{ color: "#FA07A5", fontSize: 21, fontWeight: "bold" }}
+              />
+            </Text>
           </Button>
         </Right>
       </ListItem>
@@ -99,11 +124,22 @@ class ProductCart extends Component {
     const adress = this.props.addresses.find(
       address => address.id === this.props.address
     );
+    let total = cart => {
+      let sum = 0;
+      for (let i = 0; i < cart.length; i++) {
+        sum += parseFloat(cart[i].item.price) * cart[i].quantity;
+      }
+      return sum;
+    };
     return (
       <ImageBackground source={bubbles} style={styles.background}>
         <List>
           {list.map(product => this.renderItem(product))}
-
+          {this.props.cart.cart.length !== 0 && (
+            <View>
+              <Text>Total: {total(list)}KD</Text>
+            </View>
+          )}
           {this.props.cart.cart.length === 0 && (
             <View>
               <Text>No Items in your cart</Text>
@@ -225,7 +261,9 @@ const mapStateToProps = state => ({
 
 const mapActionsToProps = dispatch => ({
   removeItemFromCart: item => dispatch(removeItemFromCart(item)),
-  checkout: cart => dispatch(checkout(cart))
+  checkout: cart => dispatch(checkout(cart)),
+  changeQuantity: (itemId, quantity) =>
+    dispatch(changeQuantity(itemId, quantity))
 });
 
 export default connect(

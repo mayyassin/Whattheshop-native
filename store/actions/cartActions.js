@@ -33,6 +33,13 @@ export const addProduct = product => {
   };
 };
 
+export const changeQuantity = (itemId, quantity) => {
+  return {
+    type: actionTypes.CHANGE_QUANTITY,
+    payload: { itemId: itemId, quantity: quantity }
+  };
+};
+
 export const removeItemFromCart = item => ({
   type: actionTypes.REMOVE_ITEM,
   payload: item

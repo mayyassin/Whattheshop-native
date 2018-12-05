@@ -47,6 +47,12 @@ const reducer = (state = initialState, action) => {
         ...state,
         address: action.payload
       };
+    case actionTypes.CHANGE_QUANTITY:
+      item = state.cart.find(item => item.id === action.payload.itemId);
+      item.quantity = action.payload.quantity;
+      return {
+        ...state
+      };
     default:
       return state;
   }
