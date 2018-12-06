@@ -2,10 +2,10 @@ import { StyleSheet } from "react-native";
 
 const styles = StyleSheet.create({
   text: {
-    color: "#8E44AD",
-    fontSize: 15,
+    color: "black",
+    fontSize: 17,
     fontWeight: "bold",
-    marginLeft: 16,
+    marginLeft: 15,
 
     justifyContent: "center",
     alignItems: "center"

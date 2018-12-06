@@ -13,7 +13,8 @@ import {
   Icon,
   Footer,
   Card,
-  CardItem
+  CardItem,
+  Row
 } from "native-base";
 import bubbles from "../../assets/images/bubbles.png";
 import { ImageBackground, View, TouchableOpacity } from "react-native";
@@ -121,7 +122,7 @@ class ProductCart extends Component {
 
   render() {
     const list = this.props.cart.cart;
-    const adress = this.props.addresses.find(
+    const address = this.props.addresses.find(
       address => address.id === this.props.address
     );
     let total = cart => {
@@ -148,33 +149,34 @@ class ProductCart extends Component {
           )}
         </List>
 
-        {adress && (
+        {address && (
           <Card style={styles.transparent}>
             <CardItem style={styles.transparent}>
               <Text style={styles.text}>
-                {"Governorate: " + adress.governorate + "\n"}
-                {"Area: " + adress.area + "\n"}
-                {"Block: " + adress.block + "\n"}
-                {"Street: " + adress.street + "\n"}
-                {"Building or House: " + adress.building_or_house}
+                {"Governorate: " + address.governorate + "\n"}
+                {"Area: " + address.area + "\n"}
+                {"Block: " + address.block + "\n"}
+                {"Street: " + address.street + "\n"}
+                {"Building or House: " + address.building_or_house}
               </Text>
             </CardItem>
           </Card>
         )}
 
         <Button
-          full
           style={{
-            backgroundColor: "#79E5BE"
+            alignSelf: "center",
+            justifyContent: "center",
+            width: 190,
+            backgroundColor: "#16DE9B"
           }}
           onPress={() => this.props.navigation.navigate("ProductList")}
         >
           <Text>Continue Shopping</Text>
         </Button>
-
-
+        <Text />
         {this.props.cart.cart.length !== 0 && (
-          <Footer
+          <View
             style={{
               width: "100%",
               alignSelf: "center",
@@ -183,21 +185,25 @@ class ProductCart extends Component {
             }}
           >
             <Button
-              full
               style={{
+                alignSelf: "center",
+                justifyContent: "center",
+                width: 190,
                 backgroundColor: "#16DE9B"
-
               }}
               onPress={() => this.handleCheckout()}
             >
               <Text>Checkout</Text>
             </Button>
+            <Text />
 
             {this.props.user && (
               <Button
-                full
                 style={{
-                  backgroundColor: "#79E5BE"
+                  alignSelf: "center",
+                  justifyContent: "center",
+                  width: 190,
+                  backgroundColor: "#16DE9B"
                 }}
                 onPress={() => this.chooseAddress()}
               >
@@ -208,8 +214,7 @@ class ProductCart extends Component {
                 )}
               </Button>
             )}
-
-          </Footer>
+          </View>
         )}
       </ImageBackground>
 
