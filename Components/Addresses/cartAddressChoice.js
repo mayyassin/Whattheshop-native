@@ -69,6 +69,20 @@ class cartAddressChoice extends Component {
     this.props.navigation.navigate("ProductCart");
   }
 
+
+  componentDidMount() {
+    this.props.navigation.setParams({
+      quantity: this.props.cartQuantity
+    });
+  }
+  componentDidUpdate(prevProps) {
+    if (prevProps.cartQuantity != this.props.cartQuantity) {
+      this.props.navigation.setParams({
+        quantity: this.props.cartQuantity
+      });
+    }
+  }
+
   renderItem(address) {
     return (
       <TouchableOpacity key={address.id}>
@@ -156,7 +170,8 @@ const mapStateToProps = state => ({
   quantity: quantityCounter(state.cart.cart),
   user: state.auth.user,
   loading: state.product.loading,
-  addresses: state.address.addresses
+  addresses: state.address.addresses,
+  cartQuantity: quantityCounter(state.cart.cart)
 });
 
 const mapActionsToProps = dispatch => {
