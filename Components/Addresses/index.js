@@ -51,7 +51,7 @@ class AddressForm extends Component {
                     <Text> </Text>
                     <Text> </Text>
                     <Label style={{ fontWeight: "bold", color: "#F32BBD" }}>
-                      Governorate
+                      Governorate*
                     </Label>
                   </Body>
                   <Item
@@ -87,7 +87,7 @@ class AddressForm extends Component {
 
                   <Body>
                     <Label style={{ fontWeight: "bold", color: "#F32BBD" }}>
-                      Area
+                      Area*
                     </Label>
                   </Body>
                   <Item
@@ -106,7 +106,7 @@ class AddressForm extends Component {
                     <Text> </Text>
                     <Text> </Text>
                     <Label style={{ fontWeight: "bold", color: "#F32BBD" }}>
-                      Block
+                      Block*
                     </Label>
                   </Body>
                   <Item
@@ -122,6 +122,7 @@ class AddressForm extends Component {
                       name="block"
                       autoCorrect={false}
                       autoCapitalize="none"
+                      keyboardType={"numeric"}
                       onChangeText={value => this.setState({ block: value })}
                     />
                   </Item>
@@ -129,7 +130,7 @@ class AddressForm extends Component {
                     <Text> </Text>
                     <Text> </Text>
                     <Label style={{ fontWeight: "bold", color: "#F32BBD" }}>
-                      Street
+                      Street*
                     </Label>
                   </Body>
                   <Item
@@ -152,7 +153,7 @@ class AddressForm extends Component {
                     <Text> </Text>
                     <Text> </Text>
                     <Label style={{ fontWeight: "bold", color: "#F32BBD" }}>
-                      Building or House
+                      Building or House*
                     </Label>
                   </Body>
                   <Item
@@ -168,6 +169,7 @@ class AddressForm extends Component {
                       name="building_or_house"
                       autoCorrect={false}
                       autoCapitalize="none"
+                      keyboardType={"numeric"}
                       onChangeText={value =>
                         this.setState({ building_or_house: value })
                       }
@@ -191,6 +193,7 @@ class AddressForm extends Component {
                     <Input
                       type="number"
                       name="floor"
+                      keyboardType={"numeric"}
                       autoCorrect={false}
                       autoCapitalize="none"
                       onChangeText={value => this.setState({ floor: value })}

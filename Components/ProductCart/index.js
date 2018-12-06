@@ -27,6 +27,29 @@ import {
 import styles from "./styles";
 
 class ProductCart extends Component {
+  constructor(props) {
+    super(props);
+    this.state = { totalPrice: 0 };
+    this.getTotalPrice = this.getTotalPrice.bind(this);
+  }
+
+  // componentDidMount() {
+  //   this.getTotalPrice(this.props.cart.cart);
+  // }
+  // componentDidUpdate(prevProps) {
+  //   if (prevProps.cart !== this.props.cart) {
+  //     this.getTotalPrice(this.props.cart.cart);
+  //   }
+  // }
+  getTotalPrice() {
+    let cart = this.props.cart.cart;
+    let sum = 0;
+    for (let i = 0; i < cart.length; i++) {
+      sum += parseFloat(cart[i].item.price) * cart[i].quantity;
+    }
+    return sum;
+    // this.setState({ totalPrice: sum });
+  }
   // constructor(props) {
   //   super(props);
   //   this.state = {
@@ -47,11 +70,12 @@ class ProductCart extends Component {
     this.props.changeQuantity(itemId, value);
   }
 
-  handleCheckout() {
+  handleCheckout(total) {
     if (this.props.user && this.props.address) {
       const cart = {
         cart: this.props.cart.cart,
-        address: this.props.cart.address
+        address: this.props.cart.address,
+        totalPrice: total
       };
       this.props.checkout(cart);
       alert(
@@ -121,23 +145,25 @@ class ProductCart extends Component {
 
   render() {
     const list = this.props.cart.cart;
-    const adress = this.props.addresses.find(
+    const address = this.props.addresses.find(
       address => address.id === this.props.address
     );
-    let total = cart => {
-      let sum = 0;
-      for (let i = 0; i < cart.length; i++) {
-        sum += parseFloat(cart[i].item.price) * cart[i].quantity;
-      }
-      return sum;
-    };
+    // let total = cart => {
+    //   let sum = 0;
+    //   for (let i = 0; i < cart.length; i++) {
+    //     sum += parseFloat(cart[i].item.price) * cart[i].quantity;
+    //   }
+    //   return sum;
+    // };
+    let total = this.getTotalPrice();
+
     return (
       <ImageBackground source={bubbles} style={styles.background}>
         <List>
           {list.map(product => this.renderItem(product))}
           {this.props.cart.cart.length !== 0 && (
             <View>
-              <Text>Total: {total(list)}KD</Text>
+              <Text>Total: {total} KD</Text>
             </View>
           )}
           {this.props.cart.cart.length === 0 && (
@@ -147,15 +173,15 @@ class ProductCart extends Component {
           )}
         </List>
 
-        {adress && (
+        {address && (
           <Card style={styles.transparent}>
             <CardItem style={styles.transparent}>
               <Text style={styles.text}>
-                {"Governorate: " + adress.governorate + "\n"}
-                {"Area: " + adress.area + "\n"}
-                {"Block: " + adress.block + "\n"}
-                {"Street: " + adress.street + "\n"}
-                {"Building or House: " + adress.building_or_house}
+                {"Governorate: " + address.governorate + "\n"}
+                {"Area: " + address.area + "\n"}
+                {"Block: " + address.block + "\n"}
+                {"Street: " + address.street + "\n"}
+                {"Building or House: " + address.building_or_house}
               </Text>
             </CardItem>
           </Card>
@@ -185,7 +211,7 @@ class ProductCart extends Component {
               style={{
                 backgroundColor: "#79E5BE"
               }}
-              onPress={() => this.handleCheckout()}
+              onPress={() => this.handleCheckout(total)}
             >
               <Text>Checkout</Text>
             </Button>

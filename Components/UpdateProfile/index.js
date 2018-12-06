@@ -89,6 +89,7 @@ class UpdateProfile extends Component {
                       name="firstname"
                       type="text"
                       autoCorrect={false}
+                      value={this.props.profile.firstname}
                       autoCapitalize="none"
                       onChangeText={value =>
                         this.setState({ firstname: value })
@@ -107,6 +108,7 @@ class UpdateProfile extends Component {
                     <Input
                       name="lastname"
                       type="text"
+                      value={this.props.profile.lastname}
                       autoCorrect={false}
                       autoCapitalize="none"
                       onChangeText={value => this.setState({ lastname: value })}
@@ -142,6 +144,7 @@ class UpdateProfile extends Component {
                       maxDate="2018-12-01"
                       confirmBtnText="Confirm"
                       cancelBtnText="Cancel"
+                      value={this.props.profile.dop}
                       customStyles={{
                         dateIcon: {
                           position: "absolute",
@@ -177,6 +180,7 @@ class UpdateProfile extends Component {
                     <Input
                       type="text"
                       name="email"
+                      value={this.props.profile.email}
                       autoCorrect={false}
                       autoCapitalize="none"
                       onChangeText={value => this.setState({ email: value })}
@@ -200,6 +204,7 @@ class UpdateProfile extends Component {
                     <Input
                       type="text"
                       name="number"
+                      value={this.props.profile.number}
                       autoCorrect={false}
                       autoCapitalize="none"
                       onChangeText={value => this.setState({ number: value })}

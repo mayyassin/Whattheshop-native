@@ -32,6 +32,19 @@ import styles from "./styles";
 import { quantityCounter } from "../../utilities/quantityCounter";
 
 class AddressList extends Component {
+  // componentDidMount() {
+  //   console.log("addressList");
+  //   this.props.navigation.setParams({
+  //     quantity: this.props.cartQuantity
+  //   });
+  // }
+  // componentDidUpdate(prevProps) {
+  //   if (prevProps.cartQuantity != this.props.cartQuantity) {
+  //     this.props.navigation.setParams({
+  //       quantity: this.props.cartQuantity
+  //     });
+  //   }
+  // }
   static navigationOptions = ({ navigation }) => ({
     title: "Address List",
     headerLeft: (
@@ -68,6 +81,20 @@ class AddressList extends Component {
       address_id: address
     });
   }
+  componentDidMount() {
+    console.log("addressList");
+    this.props.navigation.setParams({
+      quantity: this.props.cartQuantity
+    });
+  }
+  componentDidUpdate(prevProps) {
+    if (prevProps.cartQuantity != this.props.cartQuantity) {
+      this.props.navigation.setParams({
+        quantity: this.props.cartQuantity
+      });
+    }
+  }
+
   renderItem(address) {
     return (
       <TouchableOpacity key={address.id}>
@@ -77,13 +104,11 @@ class AddressList extends Component {
             <Card style={styles.transparent}>
               <CardItem style={styles.transparent}>
                 <Text style={styles.text}>
-
-                  {"Governorate: " + adress.governorate + "\n"}
-                  {"Area: " + adress.area + "\n"}
-                  {"Block: " + adress.block + "\n"}
-                  {"Street: " + adress.street + "\n"}
-                  {"Building or House: " + adress.building_or_house}
-
+                  {"Governorate: " + address.governorate + "\n"}
+                  {"Area: " + address.area + "\n"}
+                  {"Block: " + address.block + "\n"}
+                  {"Street: " + address.street + "\n"}
+                  {"Building or House: " + address.building_or_house}
                 </Text>
               </CardItem>
             </Card>
@@ -166,7 +191,8 @@ const mapStateToProps = state => ({
   quantity: quantityCounter(state.cart.cart),
   user: state.auth.user,
   loading: state.product.loading,
-  addresses: state.address.addresses
+  addresses: state.address.addresses,
+  cartQuantity: quantityCounter(state.cart.cart)
 });
 
 export default connect(mapStateToProps)(AddressList);
