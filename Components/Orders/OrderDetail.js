@@ -70,15 +70,20 @@ class OrderDetail extends Component {
       let OrderItems;
       if (order) {
         OrderItems = order.order_product.map(product => (
-          <Text style={styles.text} key={product.id}>
-            Product name:{product.name} | Price: {product.price} | Quantity:
-            {product.quantity}
+          <Text style={styles.text}>
+            Product name: {product.name + "\n"}
+            Price: {product.price + "\n"}
+            Quantity: {product.quantity + "\n"}
+
           </Text>
         ));
       }
 
       return (
-        <ImageBackground source={bubbles} style={styles.background}>
+        <ImageBackground
+          source={bubbles}
+          style={{ flex: 1, backgroundColor: "black" }}
+        >
           <Content style={{ flex: 3 }}>
             <Body style={styles.bodyText}>
               <Text style={styles.text}>
@@ -89,13 +94,13 @@ class OrderDetail extends Component {
               </Text>
               <Text style={styles.text}> {OrderItems}</Text>
               <Text style={styles.text}>
-                Governorate: {order.address.governorate}
-                Area:{order.address.area}
-                Block:{order.address.block}
-                Street:{order.address.street}
-                Building:{order.address.building_or_house}
-                Floor:{order.address.governorate}
-                Extra Directions:{order.address.extra_directions}
+                Governorate: {order.address.governorate + "\n"}
+                Area: {order.address.area + "\n"}
+                Block: {order.address.block + "\n"}
+                Street: {order.address.street + "\n"}
+                Building: {order.address.building_or_house + "\n"}
+                Floor: {order.address.governorate + "\n"}
+                Extra Directions: {order.address.extra_directions + "\n"}
               </Text>
             </Body>
 
