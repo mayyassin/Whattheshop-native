@@ -23,6 +23,7 @@ import bubbles from "../../assets/images/bubbles.png";
 import { ImageBackground, View, TouchableOpacity } from "react-native";
 // Actions
 import * as actionCreators from "../../store/actions";
+import { quantityCounter } from "../../utilities/quantityCounter";
 
 class OrderDetail extends Component {
   static navigationOptions = ({ navigation }) => ({
@@ -48,6 +49,17 @@ class OrderDetail extends Component {
   componentDidMount() {
     const order = this.props.navigation.getParam("order", {});
     this.props.fetchOrder(order.id);
+    this.props.navigation.setParams({
+      quantity: this.props.cartQuantity
+    });
+  }
+
+  componenetDidUpdate(prevProps) {
+    if (prevProps.cartQuantity != this.props.cartQuantity) {
+      this.props.navigation.setParams({
+        quantity: this.props.cartQuantity
+      });
+    }
   }
 
   render() {
@@ -62,6 +74,7 @@ class OrderDetail extends Component {
             Product name: {product.name + "\n"}
             Price: {product.price + "\n"}
             Quantity: {product.quantity + "\n"}
+
           </Text>
         ));
       }
@@ -77,6 +90,7 @@ class OrderDetail extends Component {
                 Order Number: {order.id + "\n"}
                 Status: {order.status + "\n"}
                 Date of Order: {order.ordered_on + "\n"}
+                Total Price: {order.price + "\n"}
               </Text>
               <Text style={styles.text}> {OrderItems}</Text>
               <Text style={styles.text}>
@@ -97,17 +111,7 @@ class OrderDetail extends Component {
                 justifyContent: "center",
                 backgroundColor: "transparent"
               }}
-            >
-              <Button
-                full
-                style={{
-                  backgroundColor: "#F32BBD"
-                }}
-                onPress={() => this.handleAdd()}
-              >
-                <Text>Add</Text>
-              </Button>
-            </Footer>
+            />
           </Content>
         </ImageBackground>
       );
@@ -118,7 +122,8 @@ class OrderDetail extends Component {
 const mapStateToProps = state => ({
   user: state.auth.user,
   order: state.orders.order,
-  loading: state.orders.loadingB
+  loading: state.orders.loadingB,
+  cartQuantity: quantityCounter(state.cart.cart)
 });
 
 const mapActionsToProps = dispatch => ({

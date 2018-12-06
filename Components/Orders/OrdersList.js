@@ -34,7 +34,7 @@ import { quantityCounter } from "../../utilities/quantityCounter";
 
 class OrdersList extends Component {
   static navigationOptions = ({ navigation }) => ({
-    title: "Product List",
+    title: "Order List",
     headerLeft: (
       <Button light transparent onPress={() => navigation.navigate("Profile")}>
         <Text>
@@ -67,8 +67,17 @@ class OrdersList extends Component {
 
   componentDidMount() {
     this.props.fetchOrders();
+    this.props.navigation.setParams({
+      quantity: this.props.cartQuantity
+    });
   }
-
+  componentDidUpdate(prevProps) {
+    if (prevProps.cartQuantity != this.props.cartQuantity) {
+      this.props.navigation.setParams({
+        quantity: this.props.cartQuantity
+      });
+    }
+  }
   handlePress(order) {
     this.props.navigation.navigate("OrderDetail", {
       order: order
@@ -165,7 +174,8 @@ const mapStateToProps = state => ({
   quantity: quantityCounter(state.cart.cart),
   user: state.auth.user,
   loading: state.orders.loadingA,
-  orders: state.orders.orders
+  orders: state.orders.orders,
+  cartQuantity: quantityCounter(state.cart.cart)
 });
 
 const mapActionsToProps = dispatch => {

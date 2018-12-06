@@ -32,6 +32,19 @@ import styles from "./styles";
 import { quantityCounter } from "../../utilities/quantityCounter";
 
 class AddressList extends Component {
+  // componentDidMount() {
+  //   console.log("addressList");
+  //   this.props.navigation.setParams({
+  //     quantity: this.props.cartQuantity
+  //   });
+  // }
+  // componentDidUpdate(prevProps) {
+  //   if (prevProps.cartQuantity != this.props.cartQuantity) {
+  //     this.props.navigation.setParams({
+  //       quantity: this.props.cartQuantity
+  //     });
+  //   }
+  // }
   static navigationOptions = ({ navigation }) => ({
     title: "Address List",
     headerLeft: (
@@ -68,8 +81,23 @@ class AddressList extends Component {
       address_id: address
     });
   }
+  componentDidMount() {
+    console.log("addressList");
+    this.props.navigation.setParams({
+      quantity: this.props.cartQuantity
+    });
+  }
+  componentDidUpdate(prevProps) {
+    if (prevProps.cartQuantity != this.props.cartQuantity) {
+      this.props.navigation.setParams({
+        quantity: this.props.cartQuantity
+      });
+    }
+  }
+
   renderItem(address) {
     return (
+
       <TouchableOpacity
         key={address.id}
         style={{ backgroundColor: "black", padding: 15 }}
@@ -91,8 +119,18 @@ class AddressList extends Component {
                 </CardItem>
               </Card>
             </ListItem>
+ <Button
+            full
+            style={{
+              backgroundColor: "#79E5BE"
+            }}
+            onPress={() => this.handlePress(address)}
+          >
+            <Text style={{ fontWeight: "bold" }}>Update</Text>
+          </Button>
           </ImageBackground>
         </Content>
+
       </TouchableOpacity>
     );
   }
@@ -161,7 +199,8 @@ const mapStateToProps = state => ({
   quantity: quantityCounter(state.cart.cart),
   user: state.auth.user,
   loading: state.product.loading,
-  addresses: state.address.addresses
+  addresses: state.address.addresses,
+  cartQuantity: quantityCounter(state.cart.cart)
 });
 
 export default connect(mapStateToProps)(AddressList);

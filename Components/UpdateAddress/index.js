@@ -34,20 +34,28 @@ import styles from "./styles";
 class UpdateAddress extends Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {
+      street: this.props.navigation.getParam("address_id").street,
+      area: this.props.navigation.getParam("address_id").area,
+      governorate: this.props.navigation.getParam("address_id").governorate,
+      building_or_house: this.props.navigation.getParam("address_id")
+        .building_or_house
+    };
     this.submitHandler = this.submitHandler.bind(this);
   }
+
   static navigationOptions = {
     title: "Update Address"
   };
 
   submitHandler(e) {
     const address_id = this.props.navigation.getParam("address_id", {});
-    alert(address_id.id);
     this.props.updateAddress(this.state, this.props.navigation, address_id.id);
   }
 
   render() {
+    const address = this.props.navigation.getParam("address_id", {});
+    console.log(address);
     return (
       <Content style={{ backgroundColor: "rgba(0,0,0,0.05)" }}>
         <Header transparent />
@@ -60,7 +68,7 @@ class UpdateAddress extends Component {
                     <Text> </Text>
                     <Text> </Text>
                     <Label style={{ fontWeight: "bold", color: "#F32BBD" }}>
-                      Governorate
+                      Governorate*
                     </Label>
                   </Body>
                   <Item
@@ -73,6 +81,11 @@ class UpdateAddress extends Component {
                   >
                     <Picker
                       mode="dropdown"
+                      iosIcon={
+                        <Icon type="Ionicons" name="md-arrow-dropdown" />
+                      }
+                      placeholderStyle={{ color: "#bfc6ea" }}
+                      placeholderIconColor="#007aff"
                       iosHeader="Select one"
                       placeHolder="Select a governorate"
                       selectedValue={this.state.governorate}
@@ -96,7 +109,7 @@ class UpdateAddress extends Component {
 
                   <Body>
                     <Label style={{ fontWeight: "bold", color: "#F32BBD" }}>
-                      Area
+                      Area*
                     </Label>
                   </Body>
                   <Item
@@ -107,6 +120,7 @@ class UpdateAddress extends Component {
                       name="area"
                       type="text"
                       autoCorrect={false}
+                      value={this.state.area}
                       autoCapitalize="none"
                       onChangeText={value => this.setState({ area: value })}
                     />
@@ -115,7 +129,7 @@ class UpdateAddress extends Component {
                     <Text> </Text>
                     <Text> </Text>
                     <Label style={{ fontWeight: "bold", color: "#F32BBD" }}>
-                      Block
+                      Block*
                     </Label>
                   </Body>
                   <Item
@@ -130,6 +144,7 @@ class UpdateAddress extends Component {
                       type="number"
                       name="block"
                       autoCorrect={false}
+                      keyboardType={"numeric"}
                       autoCapitalize="none"
                       onChangeText={value => this.setState({ block: value })}
                     />
@@ -138,7 +153,7 @@ class UpdateAddress extends Component {
                     <Text> </Text>
                     <Text> </Text>
                     <Label style={{ fontWeight: "bold", color: "#F32BBD" }}>
-                      Street
+                      Street*
                     </Label>
                   </Body>
                   <Item
@@ -152,6 +167,7 @@ class UpdateAddress extends Component {
                     <Input
                       type="text"
                       name="street"
+                      value={this.state.street}
                       autoCorrect={false}
                       autoCapitalize="none"
                       onChangeText={value => this.setState({ street: value })}
@@ -161,7 +177,7 @@ class UpdateAddress extends Component {
                     <Text> </Text>
                     <Text> </Text>
                     <Label style={{ fontWeight: "bold", color: "#F32BBD" }}>
-                      Building or House
+                      Building or House*
                     </Label>
                   </Body>
                   <Item
@@ -174,6 +190,7 @@ class UpdateAddress extends Component {
                   >
                     <Input
                       type="number"
+                      keyboardType={"numeric"}
                       name="building_or_house"
                       autoCorrect={false}
                       autoCapitalize="none"
@@ -201,7 +218,9 @@ class UpdateAddress extends Component {
                       type="number"
                       name="floor"
                       autoCorrect={false}
+                      value={this.state.fl}
                       autoCapitalize="none"
+                      keyboardType={"numeric"}
                       onChangeText={value => this.setState({ floor: value })}
                     />
                   </Item>
@@ -223,6 +242,7 @@ class UpdateAddress extends Component {
                     <Input
                       type="text"
                       name="extra_directions"
+                      value={this.state.extra_directions}
                       autoCorrect={false}
                       autoCapitalize="none"
                       onChangeText={value =>
