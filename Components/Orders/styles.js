@@ -5,8 +5,9 @@ const styles = StyleSheet.create({
   text: {
     fontWeight: "bold",
     color: "#16DE9B",
-    fontSize: 25,
+    fontSize: 20,
     flex: 3,
+    marginLeft: 5,
     justifyContent: "center",
     alignItems: "center"
   },
