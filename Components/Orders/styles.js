@@ -4,7 +4,7 @@ import bubbles from "../../assets/images/bubbles.png";
 const styles = StyleSheet.create({
   text: {
     fontWeight: "bold",
-    color: "white",
+    color: "#16DE9B",
     fontSize: 25,
     flex: 3,
     justifyContent: "center",

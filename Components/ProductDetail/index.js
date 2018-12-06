@@ -99,22 +99,19 @@ class ProductDetail extends Component {
         <Content>
           <ImageBackground source={bubbles} style={styles.background}>
             <List>
+              <Thumbnail bordered source={{ uri: this.props.item.img1 }} />
               <ListItem style={styles.top}>
-                <Left>
-                  <Text style={styles.text}>
-                    {this.props.item.name + "\n"}
-                    {this.props.item.category + "\n"}
-                    {this.props.item.price + " KD" + "\n"}
-                    {"Description: " + this.props.item.description + "\n"}
-                    {this.props.item.quantity + " in stock\n"}
-                  </Text>
-                </Left>
+                <Text style={styles.text}>
+                  {"Name: " + this.props.item.name + "\n"}
+                  {"Category: " + this.props.item.category + "\n"}
+                  {"Price: " + this.props.item.price + " KD" + "\n"}
+                  {"Description: " + "\n" + this.props.item.description + "\n"}
+                  {this.props.item.quantity + " in stock\n"}
+                </Text>
 
                 <Body />
-                <Right>
-                  <Thumbnail bordered source={{ uri: this.props.item.img }} />
-                </Right>
               </ListItem>
+
               {this.props.item.quantity && (
                 <View>
                   <ListItem style={{ borderBottomWidth: 0 }}>
@@ -131,7 +128,7 @@ class ProductDetail extends Component {
                   <Button
                     full
                     style={{
-                      backgroundColor: "#79E5BE"
+                      backgroundColor: "#16DE9B"
                     }}
                     onPress={() => this.handleAdd()}
                   >

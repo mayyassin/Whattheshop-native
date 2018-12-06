@@ -97,23 +97,29 @@ class AddressList extends Component {
 
   renderItem(address) {
     return (
-      <TouchableOpacity key={address.id}>
-        <ImageBackground source={bubbles} style={styles.background}>
-          <View style={styles.overlay} />
-          <ListItem style={styles.transparent}>
-            <Card style={styles.transparent}>
-              <CardItem style={styles.transparent}>
-                <Text style={styles.text}>
-                  {"Governorate: " + address.governorate + "\n"}
-                  {"Area: " + address.area + "\n"}
-                  {"Block: " + address.block + "\n"}
-                  {"Street: " + address.street + "\n"}
-                  {"Building or House: " + address.building_or_house}
-                </Text>
-              </CardItem>
-            </Card>
-          </ListItem>
-          <Button
+
+      <TouchableOpacity
+        key={address.id}
+        style={{ backgroundColor: "black", padding: 15 }}
+      >
+        <Content>
+          <ImageBackground source={bubbles} style={styles.background}>
+            <View style={styles.overlay} />
+            <ListItem style={styles.transparent}>
+              <Card style={styles.transparent}>
+                <CardItem style={styles.transparent}>
+                  <Text style={styles.text}>
+                    Governorate: {address.governorate + "\n"}
+                    Area: {address.area + "\n"}
+                    Block: {address.block + "\n"}
+                    Street: {address.street + "\n"}
+                    Building/House: {address.building_or_house + "\n"}
+                    Floor: {address.street + "\n"}
+                  </Text>
+                </CardItem>
+              </Card>
+            </ListItem>
+ <Button
             full
             style={{
               backgroundColor: "#79E5BE"
@@ -122,7 +128,9 @@ class AddressList extends Component {
           >
             <Text style={{ fontWeight: "bold" }}>Update</Text>
           </Button>
-        </ImageBackground>
+          </ImageBackground>
+        </Content>
+
       </TouchableOpacity>
     );
   }
@@ -150,7 +158,7 @@ class AddressList extends Component {
           >
             <Button
               style={{
-                backgroundColor: "#79E5BE"
+                backgroundColor: "#16DE9B"
               }}
               onPress={
                 this.props.user

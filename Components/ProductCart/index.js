@@ -13,7 +13,8 @@ import {
   Icon,
   Footer,
   Card,
-  CardItem
+  CardItem,
+  Row
 } from "native-base";
 import bubbles from "../../assets/images/bubbles.png";
 import { ImageBackground, View, TouchableOpacity } from "react-native";
@@ -161,6 +162,7 @@ class ProductCart extends Component {
       <ImageBackground source={bubbles} style={styles.background}>
         <List>
           {list.map(product => this.renderItem(product))}
+
           {this.props.cart.cart.length !== 0 && (
             <View>
               <Text>Total: {total} KD</Text>
@@ -188,17 +190,19 @@ class ProductCart extends Component {
         )}
 
         <Button
-          full
           style={{
-            backgroundColor: "#79E5BE"
+            alignSelf: "center",
+            justifyContent: "center",
+            width: 190,
+            backgroundColor: "#16DE9B"
           }}
           onPress={() => this.props.navigation.navigate("ProductList")}
         >
           <Text>Continue Shopping</Text>
         </Button>
-
+        <Text />
         {this.props.cart.cart.length !== 0 && (
-          <Footer
+          <View
             style={{
               width: "100%",
               alignSelf: "center",
@@ -207,19 +211,25 @@ class ProductCart extends Component {
             }}
           >
             <Button
-              full
               style={{
-                backgroundColor: "#79E5BE"
+                alignSelf: "center",
+                justifyContent: "center",
+                width: 190,
+                backgroundColor: "#16DE9B"
               }}
               onPress={() => this.handleCheckout(total)}
             >
               <Text>Checkout</Text>
             </Button>
+            <Text />
+
             {this.props.user && (
               <Button
-                full
                 style={{
-                  backgroundColor: "#79E5BE"
+                  alignSelf: "center",
+                  justifyContent: "center",
+                  width: 190,
+                  backgroundColor: "#16DE9B"
                 }}
                 onPress={() => this.chooseAddress()}
               >
@@ -230,7 +240,7 @@ class ProductCart extends Component {
                 )}
               </Button>
             )}
-          </Footer>
+          </View>
         )}
       </ImageBackground>
 

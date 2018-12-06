@@ -69,6 +69,7 @@ class cartAddressChoice extends Component {
     this.props.navigation.navigate("ProductCart");
   }
 
+
   componentDidMount() {
     this.props.navigation.setParams({
       quantity: this.props.cartQuantity
@@ -81,6 +82,7 @@ class cartAddressChoice extends Component {
       });
     }
   }
+
   renderItem(address) {
     return (
       <TouchableOpacity key={address.id}>

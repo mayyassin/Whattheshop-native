@@ -133,7 +133,7 @@ class OrdersList extends Component {
           >
             <Button
               style={{
-                backgroundColor: "#79E5BE"
+                backgroundColor: "#16DE9B"
               }}
               onPress={
                 this.props.user

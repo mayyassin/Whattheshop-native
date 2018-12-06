@@ -136,7 +136,7 @@ class UpdateProfile extends Component {
                         marginTop: 10,
                         marginBottom: 10
                       }}
-                      date={this.state.date}
+                      date={this.state.dob}
                       mode="date"
                       placeholder="select date"
                       format="YYYY-MM-DD"
@@ -158,7 +158,7 @@ class UpdateProfile extends Component {
                         // ... You can check the source to find the other keys.
                       }}
                       onDateChange={date => {
-                        this.setState({ date: date });
+                        this.setState({ dob: date });
                       }}
                     />
                   </Item>
@@ -227,7 +227,7 @@ class UpdateProfile extends Component {
                 alignSelf: "center",
                 justifyContent: "center",
                 width: 120,
-                backgroundColor: "#79E5BE"
+                backgroundColor: "#16DE9B"
               }}
               success
               onPress={() => this.submitHandler()}
