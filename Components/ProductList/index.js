@@ -118,7 +118,7 @@ class ProductList extends Component {
         onPress={() => this.handlePress(product)}
       >
         <ImageBackground
-          source={{ uri: product.img }}
+          source={{ uri: product.img1 }}
           style={styles.background}
         >
           <View style={styles.overlay} />
@@ -129,7 +129,7 @@ class ProductList extends Component {
                 <Left>
                   <Thumbnail
                     bordered
-                    source={{ uri: product.img }}
+                    source={{ uri: product.img1 }}
                     style={styles.thumbnail}
                   />
                   <Text style={styles.text}>{product.name}</Text>
@@ -287,10 +287,8 @@ const mapActionsToProps = dispatch => {
     onSearch: query => dispatch(actionCreators.filterProducts(query)),
     categoryChoice: query => dispatch(actionCreators.filterCategory(query)),
     check: navigation =>
-
       dispatch(actionCreators.checkForExpiredToken(navigation)),
     fetchAddresses: () => dispatch(actionCreators.fetchAddresses())
-
   };
 };
 

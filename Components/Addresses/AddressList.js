@@ -70,9 +70,8 @@ class AddressList extends Component {
   }
   renderItem(address) {
     return (
-
       <TouchableOpacity
-        key={adress.id}
+        key={address.id}
         style={{ backgroundColor: "black", padding: 15 }}
       >
         <Content>
@@ -82,12 +81,12 @@ class AddressList extends Component {
               <Card style={styles.transparent}>
                 <CardItem style={styles.transparent}>
                   <Text style={styles.text}>
-                    Governorate: {adress.governorate + "\n"}
-                    Area: {adress.area + "\n"}
-                    Block: {adress.block + "\n"}
-                    Street: {adress.street + "\n"}
-                    Building/House: {adress.building_or_house + "\n"}
-                    Floor: {adress.street + "\n"}
+                    Governorate: {address.governorate + "\n"}
+                    Area: {address.area + "\n"}
+                    Block: {address.block + "\n"}
+                    Street: {address.street + "\n"}
+                    Building/House: {address.building_or_house + "\n"}
+                    Floor: {address.street + "\n"}
                   </Text>
                 </CardItem>
               </Card>

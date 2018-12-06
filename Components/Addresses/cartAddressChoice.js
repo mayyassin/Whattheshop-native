@@ -69,26 +69,26 @@ class cartAddressChoice extends Component {
     this.props.navigation.navigate("ProductCart");
   }
 
-  renderItem(adress) {
+  renderItem(address) {
     return (
-      <TouchableOpacity key={adress.id}>
+      <TouchableOpacity key={address.id}>
         <ImageBackground source={bubbles} style={styles.background}>
           <View style={styles.overlay} />
           <ListItem style={styles.transparent}>
             <Card style={styles.transparent}>
               <CardItem style={styles.transparent}>
                 <Text style={styles.text}>
-                  {"Governorate: " + adress.governorate + "\n"}
-                  {"Area: " + adress.area + "\n"}
-                  {"Block: " + adress.block + "\n"}
-                  {"Street: " + adress.street + "\n"}
-                  {"Building or House: " + adress.building_or_house}
+                  {"Governorate: " + address.governorate + "\n"}
+                  {"Area: " + address.area + "\n"}
+                  {"Block: " + address.block + "\n"}
+                  {"Street: " + address.street + "\n"}
+                  {"Building or House: " + address.building_or_house}
                 </Text>
                 <Button
                   style={{
                     backgroundColor: "#79E5BE"
                   }}
-                  onPress={() => this.setAddress(adress.id)}
+                  onPress={() => this.setAddress(address.id)}
                 >
                   {/* <Icon
                 style={{
